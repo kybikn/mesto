@@ -1,5 +1,6 @@
 .page {
   max-width: 1280px;
+  margin: 0 auto;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   background: #000000;

@@ -7,5 +7,14 @@
   background-repeat: no-repeat;
   background-color: transparent;
   border: none;
+  transition: 0.7s;
   cursor: pointer;
+}
+
+.gallery__cart-button:hover {
+  opacity: 0.6;
+}
+
+.gallery__cart-button:active {
+  /* background: #000000; */
 }
