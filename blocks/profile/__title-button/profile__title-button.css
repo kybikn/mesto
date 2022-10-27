@@ -1,9 +1,9 @@
-.profile__button {
+.profile__title-button {
   background-image: url(../../../images/pencil.svg);
   background-repeat: no-repeat;
   background-color: transparent;
   box-sizing: border-box;
-  margin-bottom: 22px;
+  margin: 7px 0 0 18px;
   width: 24px;
   height: 24px;
   background-position: center;
@@ -15,4 +15,13 @@
 
 .profile__button:hover {
   opacity: 0.6;
+}
+
+@media screen and (max-width: 320px) {
+  .profile__title-button {
+    margin-top: 0;
+    margin-left: 10px;
+    width: 18px;
+    height: 18px;
+  }
 }

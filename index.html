@@ -13,26 +13,29 @@
 
 <body class="root">
   <div class="page">
-    <header class="header container">
+    <header class="header">
       <div class="header__logo"></div>
     </header>
 
     <main>
-      <section class="profile container">
+      <section class="profile">
         <div class="profile__content">
-          <div class="profile__name">
-            <img class="profile__img" src="./images/Kusto.jpg" alt="Жак-Ив Кусто" />
-            <div class="profile__text">
-              <h1 class="profile__title">Жак-Ив Кусто</h1>
-              <p class="profile__subtitle">Исследователь океана</p>
+          <img class="profile__img" src="./images/Kusto.jpg" alt="Жак-Ив Кусто" />
+
+          <div class="profile__text">
+            <div class="profile__title">
+              <h1 class="profile__title-name">Жак-Ив Кусто</h1>
+              <button class="profile__title-button" type="button"></button>
             </div>
-            <button class="profile__button" type="button"></button>
+
+            <p class="profile__subtitle">Исследователь океана</p>
           </div>
+
           <button class="profile__button-plus" type="button"></button>
         </div>
       </section>
 
-      <section class="gallery container">
+      <section class="gallery">
         <ul class="gallery__list">
           <li>
             <figure class="gallery__cart">
@@ -95,7 +98,7 @@
       </section>
     </main>
 
-    <footer class="footer container">
+    <footer class="footer">
       <p class="footer__text">&copy; 2022 Mesto Russia</p>
     </footer>
   </div>

@@ -15,3 +15,9 @@
 .profile__button-plus:hover {
   opacity: 0.6;
 }
+
+@media screen and (max-width: 320px) {
+  .profile__button-plus {
+    width: 282px;
+  }
+}
