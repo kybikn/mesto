@@ -1,6 +1,13 @@
 .profile__text {
   display: flex;
   flex-direction: column;
-  gap: 7px;
-  margin: 0 20px 0 30px;
+  row-gap: 7px;
+  margin-right: 215px;
+}
+
+@media screen and (max-width: 320px) {
+  .profile__text {
+    margin-right: 0;
+    margin-bottom: 33px;
+  }
 }

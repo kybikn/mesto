@@ -1,5 +1,11 @@
-.container {
+/* .container {
   max-width: 880px;
   margin: 0 auto;
-  /* padding: 0 200px; */
+  padding: 0 200px;
 }
+
+@media screen and (max-width: 590px) {
+  .container {
+    max-width: 282px;
+  }
+} */

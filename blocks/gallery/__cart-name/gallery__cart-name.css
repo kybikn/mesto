@@ -1,7 +1,6 @@
 .gallery__cart-name {
   display: flex;
   justify-content: space-between;
-  /* justify-content: space-around; */
   align-items: center;
-  padding: 20px 20px 25px;
+  padding: 20px 20px 26px;
 }
