@@ -1,9 +1,9 @@
-.profile__subtitle {
-  margin: 0;
+.footer__text {
+  margin: 70px 0 60px;
   font-family: "Inter", Arial, sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 18px;
   line-height: 22px;
-  color: #ffffff;
+  color: #545454;
 }

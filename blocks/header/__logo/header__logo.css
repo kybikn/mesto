@@ -2,8 +2,13 @@
   background-image: url("../../../images/logo.svg");
   background-size: contain;
   background-repeat: no-repeat;
+  /* fill: #ffffff; */
   width: 142px;
   height: 33px;
   padding-bottom: 41px;
   transition: 0.7s;
+}
+
+.header__logo:hover {
+  background: #000000;
 }

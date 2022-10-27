@@ -8,5 +8,10 @@
   border: 2px solid #ffffff;
   border-radius: 2px;
   box-sizing: border-box;
+  transition: 0.7s;
   cursor: pointer;
+}
+
+.profile__button-plus:hover {
+  opacity: 0.6;
 }

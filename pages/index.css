@@ -26,3 +26,6 @@
 @import url(../blocks/gallery/__cart-name/gallery__cart-name.css);
 @import url(../blocks/gallery/__cart-title/gallery__cart-title.css);
 @import url(../blocks/gallery/__cart-button/gallery__cart-button.css);
+
+@import url(../blocks/footer/footer.css);
+@import url(../blocks/footer/__text/footer__text.css);
