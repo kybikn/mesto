@@ -4,9 +4,10 @@
   /* border-bottom: 1px solid #545454; */
 }
 
-.header::after {
+.header::before {
   content: "";
   width: 880px;
+  height: 1px;
   margin: 0 auto;
   position: absolute;
   top: 119px;
@@ -24,7 +25,7 @@
     /* padding: 28px 19px 0; */
   }
 
-  .header::after {
+  .header::before {
     width: 320px;
     top: 84px;
   }

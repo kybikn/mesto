@@ -6,12 +6,22 @@
   font-size: 42px;
   line-height: 48px;
   color: #ffffff;
+  /* max-width: 100%; */
+  width: 100%;
+  max-width: 510px;
+  word-wrap: break-word;
+}
+
+@media screen and (max-width: 1279px) {
+  .profile__title-name {
+    text-align: center;
+  }
 }
 
 @media screen and (max-width: 320px) {
   .profile__title-name {
     font-size: 27px;
     line-height: 33px;
-    text-align: center;
+    /* text-align: center; */
   }
 }

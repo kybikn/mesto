@@ -27,10 +27,8 @@
               <h1 class="profile__title-name">Жак-Ив Кусто</h1>
               <button class="profile__title-button" type="button"></button>
             </div>
-
             <p class="profile__subtitle">Исследователь океана</p>
           </div>
-
           <button class="profile__button-plus" type="button"></button>
         </div>
       </section>
@@ -86,7 +84,6 @@
             <figure class="gallery__cart">
               <img class="gallery__cart-img" src="./images/Karachay-Cherkessia.jpg" alt="Эльбрус">
               <figcaption class="gallery__cart-name">
-                <!-- <h2 class="gallery__cart-title">Карачаево-Ч...</h2> -->
                 <h2 class="gallery__cart-title">Карачаево-Черкессия</h2>
                 <button class="gallery__cart-button" type="button"></button>
               </figcaption>
@@ -101,7 +98,22 @@
     <footer class="footer">
       <p class="footer__text">&copy; 2022 Mesto Russia</p>
     </footer>
+
+
+    <div class="popup">
+      <div class="popup__content">
+        <button class="popup__close"></button>
+        <h2 class="popup__title">Редактировать профиль</h2>
+        <form class="popup__form" action="#" name="form">
+          <input class="popup__input popup__input_type_name" type="text" name="name" autocomplete="name">
+          <input class="popup__input popup__input_type_job" type="text" name="profession">
+          <button class="popup__button" type="submit">Сохранить</button>
+        </form>
+      </div>
+    </div>
+
   </div>
+  <script src="./pages/script.js"></script>
 </body>
 
 </html>
