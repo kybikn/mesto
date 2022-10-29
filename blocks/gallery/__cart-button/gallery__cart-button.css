@@ -1,0 +1,13 @@
+.gallery__cart-button {
+  margin: 0;
+  width: 22px;
+  height: 19px;
+  background: url(../../../images/heart.svg) no-repeat center transparent;
+  border: none;
+  transition: 0.7s;
+  cursor: pointer;
+}
+
+.gallery__cart-button:hover {
+  opacity: 0.6;
+}
