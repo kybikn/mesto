@@ -1,10 +1,5 @@
 .profile__title {
+  position: relative;
   display: flex;
   align-items: center;
-}
-
-@media screen and (max-width: 320px) {
-  .profile__title {
-    margin-left: 30px;
-  }
 }

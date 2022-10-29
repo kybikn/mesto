@@ -1,7 +1,8 @@
 .profile__title-button {
   background: url(../../../images/pencil.svg) no-repeat center transparent;
+  position: absolute;
+  right: -40px;
   box-sizing: border-box;
-  margin: 7px 18px 0;
   min-width: 24px;
   width: 24px;
   height: 24px;
@@ -15,16 +16,9 @@
   opacity: 0.6;
 }
 
-@media screen and (max-width: 1279px) {
-  .profile__title-button {
-    margin-top: 0;
-    margin-left: 10px;
-    margin-right: 10px;
-  }
-}
-
 @media screen and (max-width: 860px) {
   .profile__title-button {
+    right: -30px;
     min-width: 18px;
     width: 18px;
     height: 18px;
