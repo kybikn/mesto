@@ -16,25 +16,19 @@ function togglePopup() {
 function closePopup(event) {
   if (
     event.target.classList.contains("popup_active") ||
-    event.target.classList.contains("popup__close") ||
-    event.target.classList.contains("popup__button")
+    event.target.classList.contains("popup__close")
   ) {
     popup.classList.remove("popup_active");
   }
 }
 
-function changeText() {
+function formSubmitHandler(event) {
+  event.preventDefault();
   profileTitleName.textContent = inputName.value;
   profileSubtitle.textContent = inputJob.value;
-  closePopup();
-}
-
-function formSubmitHandler(evt) {
-  evt.preventDefault();
+  popup.classList.remove("popup_active");
 }
 
 buttonProfile.addEventListener("click", togglePopup);
 popup.addEventListener("click", closePopup);
-closeButton.addEventListener("click", closePopup);
-form.addEventListener("submit", changeText);
 form.addEventListener("submit", formSubmitHandler);
