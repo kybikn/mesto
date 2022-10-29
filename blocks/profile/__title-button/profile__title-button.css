@@ -1,13 +1,10 @@
 .profile__title-button {
-  background-image: url(../../../images/pencil.svg);
-  background-repeat: no-repeat;
-  background-color: transparent;
+  background: url(../../../images/pencil.svg) no-repeat center transparent;
   box-sizing: border-box;
   margin: 7px 18px 0;
-  width: 24px;
   min-width: 24px;
+  width: 24px;
   height: 24px;
-  background-position: center;
   border: 1px solid #ffffff;
   border-radius: 2px;
   cursor: pointer;
@@ -18,10 +15,17 @@
   opacity: 0.6;
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 1279px) {
   .profile__title-button {
     margin-top: 0;
     margin-left: 10px;
+    margin-right: 10px;
+  }
+}
+
+@media screen and (max-width: 860px) {
+  .profile__title-button {
+    min-width: 18px;
     width: 18px;
     height: 18px;
   }

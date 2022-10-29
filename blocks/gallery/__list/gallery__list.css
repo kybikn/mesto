@@ -3,17 +3,6 @@
   flex-wrap: wrap;
   margin: 0;
   padding: 0;
+  justify-content: center;
   gap: 20px 17px;
-}
-
-@media screen and (max-width: 980px) {
-  .profile__content {
-    flex-wrap: nowrap;
-  }
-}
-
-@media screen and (max-width: 320px) {
-  .profile__content {
-    flex-wrap: wrap;
-  }
 }
