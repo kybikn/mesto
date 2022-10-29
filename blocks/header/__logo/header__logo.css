@@ -2,14 +2,12 @@
   background-image: url("../../../images/logo.svg");
   background-size: contain;
   background-repeat: no-repeat;
-  /* fill: #ffffff; */
   width: 142px;
   height: 33px;
   margin-bottom: 41px;
-  transition: 0.7s;
 }
 
-@media screen and (max-width: 590px) {
+@media screen and (max-width: 320px) {
   .header__logo {
     width: 103px;
     height: 24px;

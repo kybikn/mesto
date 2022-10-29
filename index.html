@@ -16,12 +16,10 @@
     <header class="header">
       <div class="header__logo"></div>
     </header>
-
     <main>
       <section class="profile">
         <div class="profile__content">
           <img class="profile__img" src="./images/Kusto.jpg" alt="Жак-Ив Кусто" />
-
           <div class="profile__text">
             <div class="profile__title">
               <h1 class="profile__title-name">Жак-Ив Кусто</h1>
@@ -32,7 +30,6 @@
           <button class="profile__button-plus" type="button"></button>
         </div>
       </section>
-
       <section class="gallery">
         <ul class="gallery__list">
           <li>
@@ -75,7 +72,7 @@
             <figure class="gallery__cart">
               <img class="gallery__cart-img" src="./images/Kabardino-Balkariya.jpg" alt="Эльбрус">
               <figcaption class="gallery__cart-name">
-                <h2 class="gallery__cart-title">Кабардино-Б...</h2>
+                <h2 class="gallery__cart-title">Кабардино-Балкария</h2>
                 <button class="gallery__cart-button" type="button"></button>
               </figcaption>
             </figure>
@@ -94,24 +91,20 @@
         </div>
       </section>
     </main>
-
     <footer class="footer">
       <p class="footer__text">&copy; 2022 Mesto Russia</p>
     </footer>
-
-
     <div class="popup">
       <div class="popup__content">
         <button class="popup__close"></button>
         <h2 class="popup__title">Редактировать профиль</h2>
         <form class="popup__form" action="#" name="form">
           <input class="popup__input popup__input_type_name" type="text" name="name" autocomplete="name">
-          <input class="popup__input popup__input_type_job" type="text" name="profession">
+          <input class="popup__input popup__input_type_job" type="text" name="profession" autocomplete="on">
           <button class="popup__button" type="submit">Сохранить</button>
         </form>
       </div>
     </div>
-
   </div>
   <script src="./pages/script.js"></script>
 </body>
