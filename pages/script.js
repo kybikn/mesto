@@ -1,8 +1,8 @@
 const buttonProfile = document.querySelector(".profile__title-button");
 const popup = document.querySelector(".popup");
 const form = document.querySelector(".popup__form");
-const inputName = document.querySelector(".popup__input-name");
-const inputJob = document.querySelector(".popup__input-job");
+const inputName = document.querySelector(".popup__input_type_name");
+const inputJob = document.querySelector(".popup__input_type_job");
 const profileTitleName = document.querySelector(".profile__title-name");
 const profileSubtitle = document.querySelector(".profile__subtitle");
 
@@ -10,7 +10,7 @@ function togglePopup() {
   inputName.value = profileTitleName.textContent;
   inputJob.value = profileSubtitle.textContent;
   popup.classList.toggle("popup_active");
-  // inputName.focus();
+  inputName.focus();
 }
 
 function closePopup(event) {

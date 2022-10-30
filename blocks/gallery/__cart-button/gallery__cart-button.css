@@ -4,6 +4,8 @@
   height: 19px;
   background: url(../../../images/heart.svg) no-repeat center transparent;
   border: none;
+  -webkit-transition: 0.7s;
+  -o-transition: 0.7s;
   transition: 0.7s;
   cursor: pointer;
 }
