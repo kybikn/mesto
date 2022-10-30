@@ -1,6 +1,7 @@
 .profile__subtitle {
   margin: 0;
   max-width: 336px;
+  -o-text-overflow: ellipsis;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;

@@ -12,6 +12,8 @@
   text-align: center;
   background: #000000;
   color: #ffffff;
+  -webkit-transition: 0.7s;
+  -o-transition: 0.7s;
   transition: 0.7s;
   cursor: pointer;
 }

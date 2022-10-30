@@ -3,6 +3,7 @@
   padding: 0;
   width: 100%;
   height: 27px;
+  -o-text-overflow: ellipsis;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;

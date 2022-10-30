@@ -6,7 +6,10 @@
   padding: 0;
   border: 2px solid #ffffff;
   border-radius: 2px;
+  -webkit-box-sizing: border-box;
   box-sizing: border-box;
+  -webkit-transition: 0.7s;
+  -o-transition: 0.7s;
   transition: 0.7s;
   cursor: pointer;
 }
