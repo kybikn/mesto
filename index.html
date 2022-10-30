@@ -23,66 +23,66 @@
           <div class="profile__text">
             <div class="profile__title">
               <h1 class="profile__title-name">Жак-Ив Кусто</h1>
-              <button class="profile__title-button" type="button"></button>
+              <button class="button button_type_edit" type="button"></button>
             </div>
             <p class="profile__subtitle">Исследователь океана</p>
           </div>
-          <button class="profile__button-plus" type="button"></button>
+          <button class="button button_type_add" type="button"></button>
         </div>
       </section>
       <section class="gallery">
         <ul class="gallery__list">
           <li>
-            <figure class="gallery__cart">
-              <img class="gallery__cart-img" src="./images/Karachaevsk.jpg" alt="Карачаевск">
-              <figcaption class="gallery__cart-name">
-                <h2 class="gallery__cart-title">Карачаевск</h2>
-                <button class="gallery__cart-button" type="button"></button>
+            <figure class="gallery__card">
+              <img class="gallery__card-img" src="./images/Karachaevsk.jpg" alt="Карачаевск">
+              <figcaption class="gallery__card-name">
+                <h2 class="gallery__card-title">Карачаевск</h2>
+                <button class="button button_type_card" type="button"></button>
               </figcaption>
             </figure>
           </li>
           <li>
-            <figure class="gallery__cart">
-              <img class="gallery__cart-img" src="./images/Elbrus.jpg" alt="Эльбрус">
-              <figcaption class="gallery__cart-name">
-                <h2 class="gallery__cart-title">Гора Эльбрус</h2>
-                <button class="gallery__cart-button" type="button"></button>
+            <figure class="gallery__card">
+              <img class="gallery__card-img" src="./images/Elbrus.jpg" alt="Эльбрус">
+              <figcaption class="gallery__card-name">
+                <h2 class="gallery__card-title">Гора Эльбрус</h2>
+                <button class="button button_type_card" type="button"></button>
               </figcaption>
             </figure>
           </li>
           <li>
-            <figure class="gallery__cart">
-              <img class="gallery__cart-img" src="./images/Dombai.jpg" alt="Эльбрус">
-              <figcaption class="gallery__cart-name">
-                <h2 class="gallery__cart-title">Домбай</h2>
-                <button class="gallery__cart-button" type="button"></button>
+            <figure class="gallery__card">
+              <img class="gallery__card-img" src="./images/Dombai.jpg" alt="Эльбрус">
+              <figcaption class="gallery__card-name">
+                <h2 class="gallery__card-title">Домбай</h2>
+                <button class="button button_type_card" type="button"></button>
               </figcaption>
             </figure>
           </li>
           <li>
-            <figure class="gallery__cart">
-              <img class="gallery__cart-img" src="./images/Nalchik.jpg" alt="Эльбрус">
-              <figcaption class="gallery__cart-name">
-                <h2 class="gallery__cart-title">Нальчик</h2>
-                <button class="gallery__cart-button" type="button"></button>
+            <figure class="gallery__card">
+              <img class="gallery__card-img" src="./images/Nalchik.jpg" alt="Эльбрус">
+              <figcaption class="gallery__card-name">
+                <h2 class="gallery__card-title">Нальчик</h2>
+                <button class="button button_type_card" type="button"></button>
               </figcaption>
             </figure>
           </li>
           <li>
-            <figure class="gallery__cart">
-              <img class="gallery__cart-img" src="./images/Kabardino-Balkariya.jpg" alt="Эльбрус">
-              <figcaption class="gallery__cart-name">
-                <h2 class="gallery__cart-title">Кабардино-Балкария</h2>
-                <button class="gallery__cart-button" type="button"></button>
+            <figure class="gallery__card">
+              <img class="gallery__card-img" src="./images/Kabardino-Balkariya.jpg" alt="Эльбрус">
+              <figcaption class="gallery__card-name">
+                <h2 class="gallery__card-title">Кабардино-Балкария</h2>
+                <button class="button button_type_card" type="button"></button>
               </figcaption>
             </figure>
           </li>
           <li>
-            <figure class="gallery__cart">
-              <img class="gallery__cart-img" src="./images/Karachay-Cherkessia.jpg" alt="Эльбрус">
-              <figcaption class="gallery__cart-name">
-                <h2 class="gallery__cart-title">Карачаево-Черкессия</h2>
-                <button class="gallery__cart-button" type="button"></button>
+            <figure class="gallery__card">
+              <img class="gallery__card-img" src="./images/Karachay-Cherkessia.jpg" alt="Эльбрус">
+              <figcaption class="gallery__card-name">
+                <h2 class="gallery__card-title">Карачаево-Черкессия</h2>
+                <button class="button button_type_card" type="button"></button>
               </figcaption>
             </figure>
           </li>
@@ -99,19 +99,20 @@
         <button class="popup__close"></button>
         <h2 class="popup__title">Редактировать профиль</h2>
         <form class="popup__form" name="popup-form">
-          <!-- // добавила не по макету еле заметный крестик очищающий поле, тк не удобно и долго очищать вручную -->
           <fieldset class="popup__box">
             <label>
               <span class="popup__input-close" onclick="this.nextElementSibling.value = ''">
                 &times;
               </span>
-              <input class="popup__input popup__input_type_name" type="text" name="name" autocomplete="off" required>
+              <input class="popup__input popup__input_type_name" type="text" name="name" placeholder="Ваше имя"
+                autocomplete="off" required>
             </label>
             <label>
               <span class="popup__input-close" onclick="this.nextElementSibling.value = ''">
                 &times;
               </span>
-              <input class="popup__input popup__input_type_job" type="text" name="job" autocomplete="off" required>
+              <input class="popup__input popup__input_type_job" type="text" name="job" placeholder="Ваша профессия"
+                autocomplete="off" required>
             </label>
           </fieldset>
           <button class="popup__button" type="submit">Сохранить</button>

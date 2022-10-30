@@ -13,17 +13,19 @@
 @import url(../blocks/profile/__text/profile__text.css);
 @import url(../blocks/profile/__title/profile__title.css);
 @import url(../blocks/profile/__title-name/profile__title-name.css);
-@import url(../blocks/profile/__title-button/profile__title-button.css);
 @import url(../blocks/profile/__subtitle/profile__subtitle.css);
-@import url(../blocks/profile/__button-plus/profile__button-plus.css);
+
+@import url(../blocks/button/button.css);
+@import url(../blocks/button/_type/_edit/button_type_edit.css);
+@import url(../blocks/button/_type/_add/button_type_add.css);
+@import url(../blocks/button/_type/_card/button_type_card.css);
 
 @import url(../blocks/gallery/gallery.css);
 @import url(../blocks/gallery/__list/gallery__list.css);
-@import url(../blocks/gallery/__cart/gallery__cart.css);
-@import url(../blocks/gallery/__cart-img/gallery__cart-img.css);
-@import url(../blocks/gallery/__cart-name/gallery__cart-name.css);
-@import url(../blocks/gallery/__cart-title/gallery__cart-title.css);
-@import url(../blocks/gallery/__cart-button/gallery__cart-button.css);
+@import url(../blocks/gallery/__card/gallery__card.css);
+@import url(../blocks/gallery/__card-img/gallery__card-img.css);
+@import url(../blocks/gallery/__card-name/gallery__card-name.css);
+@import url(../blocks/gallery/__card-title/gallery__card-title.css);
 
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__text/footer__text.css);
