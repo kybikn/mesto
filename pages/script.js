@@ -10,7 +10,7 @@ function togglePopup() {
   inputName.value = profileTitleName.textContent;
   inputJob.value = profileSubtitle.textContent;
   popup.classList.toggle("popup_active");
-  inputName.focus();
+  // inputName.focus();
 }
 
 function closePopup(event) {
