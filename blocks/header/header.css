@@ -40,3 +40,10 @@
     top: 84px;
   }
 }
+
+@media screen and (max-width: 320px) {
+  .header {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}

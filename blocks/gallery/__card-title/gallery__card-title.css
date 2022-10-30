@@ -1,6 +1,6 @@
-.gallery__cart-title {
+.gallery__card-title {
   margin: 0;
-  width: 190px;
+  max-width: 190px;
   -o-text-overflow: ellipsis;
   text-overflow: ellipsis;
   white-space: nowrap;

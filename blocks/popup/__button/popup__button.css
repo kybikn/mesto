@@ -12,6 +12,7 @@
   text-align: center;
   background: #000000;
   color: #ffffff;
+  border: none;
   -webkit-transition: 0.7s;
   -o-transition: 0.7s;
   transition: 0.7s;
