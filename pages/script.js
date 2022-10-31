@@ -1,4 +1,4 @@
-const profileEditBtn = document.querySelector(".button_type_edit");
+const profileEditBtn = document.querySelector(".profile__button-edit");
 const popup = document.querySelector(".popup");
 const form = document.querySelector(".popup__form");
 const inputName = document.querySelector(".popup__input_type_name");
