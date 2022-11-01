@@ -1,7 +1,7 @@
 .gallery__button-card {
-  margin: 0;
+  background-image: url(../../../../images/heart.svg);
   width: 22px;
   height: 19px;
-  background-image: url(../../../../images/heart.svg);
+  margin: 0;
   border: none;
 }
