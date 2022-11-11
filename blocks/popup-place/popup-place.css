@@ -1,0 +1,7 @@
+.popup-place {
+  opacity: 0;
+}
+
+.popup-place_active {
+  opacity: 1;
+}

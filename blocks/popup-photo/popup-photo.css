@@ -1,0 +1,9 @@
+.popup-photo {
+  opacity: 0;
+}
+
+.popup-photo_active {
+  opacity: 1;
+  width: 75vw;
+  height: 75vh;
+}
