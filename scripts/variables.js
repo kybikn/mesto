@@ -23,18 +23,20 @@ const initialCards = [
     name: "Карачаевск",
     link: "./images/Karachaevsk.jpg",
   },
-  {
-    name: "Архыз",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
-  },
+  // {
+  //   name: "Архыз",
+  //   link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
+  // },
 ];
 
 const profileEditBtn = document.querySelector(".profile__button-edit");
 const buttonAdd = document.querySelector(".profile__button-add");
 const popup = document.querySelector(".popup");
+const popupProfile = document.querySelector(".popup-profile");
 const popupPlace = document.querySelector(".popup-place");
 const popupPhoto = document.querySelector(".popup-photo");
 const form = document.querySelector(".popup__form");
+const formPlace = document.querySelector(".popup__form-place");
 const inputName = document.querySelector(".popup__input_type_name");
 const inputJob = document.querySelector(".popup__input_type_job");
 const inputPlace = document.querySelector(".popup__input_type_place");
