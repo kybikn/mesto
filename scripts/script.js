@@ -1,13 +1,11 @@
 function openPopup(popup) {
   inputName.focus();
   popup.classList.add("popup_active");
-  popup.classList.add("popup-place_active");
   popup.addEventListener("click", handleClosePopup);
 }
 
 function closePopup(popup) {
   popup.classList.remove("popup_active");
-  popup.classList.remove("popup-place_active");
   popup.removeEventListener("click", handleClosePopup);
 }
 
@@ -15,7 +13,6 @@ function handleClosePopup(event) {
   const popupClose = event.target.closest(".popup");
   if (
     event.target.classList.contains("popup_active") ||
-    event.target.classList.contains("popup-place_active") ||
     event.target.classList.contains("popup__close")
   ) {
     closePopup(popupClose);
@@ -34,8 +31,26 @@ function handleSubmitForm(event) {
   event.preventDefault();
   profileTitle.textContent = inputName.value;
   profileSubtitle.textContent = inputJob.value;
+  closePopup(popupProfile);
 }
 formProfile.addEventListener("submit", handleSubmitForm);
+
+// открытие попапа карточки места
+profileAddBtn.addEventListener("click", () => {
+  openPopup(popupPlace);
+  inputPlace.value = "";
+  inputLink.value = "";
+});
+
+//попап добавление карточки места
+function handleAddCard(event) {
+  event.preventDefault();
+  closePopup(popupPlace);
+  const card = { name: inputPlace.value, link: inputLink.value };
+  renderCard(card);
+  // formPlace.reset();
+}
+formPlace.addEventListener("submit", handleAddCard);
 
 // генерируем карточку
 function generateCard(item) {
@@ -46,6 +61,7 @@ function generateCard(item) {
   const cardLink = newCard.querySelector(".gallery__card-img");
   cardLink.src = item.link;
   cardName.alt = item.name;
+
   const cardLike = newCard.querySelector(".gallery__button-like");
   cardLike.addEventListener("click", addLike);
   const buttonRemove = newCard.querySelector(".gallery__button-remove");
