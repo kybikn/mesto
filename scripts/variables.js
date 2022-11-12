@@ -12,6 +12,10 @@ const initialCards = [
     link: "./images/Kabardino-Balkariya.jpg",
   },
   {
+    name: "Карачаевск",
+    link: "./images/Karachaevsk.jpg",
+  },
+  {
     name: "Домбай",
     link: "./images/Dombai.jpg",
   },
@@ -19,14 +23,6 @@ const initialCards = [
     name: "Эльбрус",
     link: "./images/Elbrus.jpg",
   },
-  {
-    name: "Карачаевск",
-    link: "./images/Karachaevsk.jpg",
-  },
-  // {
-  //   name: "Архыз",
-  //   link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
-  // },
 ];
 
 const profileEditBtn = document.querySelector(".profile__button-edit");

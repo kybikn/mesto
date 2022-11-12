@@ -33,6 +33,7 @@ function handleSubmitForm(event) {
   profileSubtitle.textContent = inputJob.value;
   closePopup(popupProfile);
 }
+
 formProfile.addEventListener("submit", handleSubmitForm);
 
 // открытие попапа карточки места
@@ -50,6 +51,7 @@ function handleAddCard(event) {
   renderCard(card);
   // formPlace.reset();
 }
+
 formPlace.addEventListener("submit", handleAddCard);
 
 // генерируем карточку
@@ -57,11 +59,15 @@ function generateCard(item) {
   const newCard = galleryCard.cloneNode(true); // клонируем карточку
   const cardName = newCard.querySelector(".gallery__card-title");
   cardName.textContent = item.name;
-  // cardName.addEventListener("click", openPopupPhoto);
   const cardLink = newCard.querySelector(".gallery__card-img");
   cardLink.src = item.link;
   cardName.alt = item.name;
-
+  cardLink.addEventListener("click", (event) => {
+    openPopup(popupPhoto);
+    popupImg.src = item.link;
+    popupImg.alt = item.name;
+    popupImgTitle.textContent = item.name;
+  });
   const cardLike = newCard.querySelector(".gallery__button-like");
   cardLike.addEventListener("click", addLike);
   const buttonRemove = newCard.querySelector(".gallery__button-remove");
