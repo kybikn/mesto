@@ -2,4 +2,16 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  opacity: 1;
+  visibility: visible;
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
