@@ -30,24 +30,22 @@ const initialCards = [
 ];
 
 const profileEditBtn = document.querySelector(".profile__button-edit");
-const buttonAdd = document.querySelector(".profile__button-add");
+const profileAddBtn = document.querySelector(".profile__button-add");
+const profileTitle = document.querySelector(".profile__title");
+const profileSubtitle = document.querySelector(".profile__subtitle");
 const popup = document.querySelector(".popup");
 const popupProfile = document.querySelector(".popup-profile");
 const popupPlace = document.querySelector(".popup-place");
 const popupPhoto = document.querySelector(".popup-photo");
-const form = document.querySelector(".popup__form");
+const formProfile = document.querySelector(".popup__form-profile");
 const formPlace = document.querySelector(".popup__form-place");
 const inputName = document.querySelector(".popup__input_type_name");
 const inputJob = document.querySelector(".popup__input_type_job");
 const inputPlace = document.querySelector(".popup__input_type_place");
-const inputUrl = document.querySelector(".popup__input_type_url");
-const profileTitleName = document.querySelector(".profile__title-name");
-const profileSubtitle = document.querySelector(".profile__subtitle");
-const popupCloseBtn = document.querySelector(".popup__close");
+const inputLink = document.querySelector(".popup__input_type_link");
 const galleryList = document.querySelector(".gallery__list");
 const tegTemplate = document.querySelector("#card").content;
-const cardTemplate = tegTemplate.querySelector(".gallery__card");
-const popupPhotoImg = document.querySelector(".popup-img");
-
-const popupImg = document.querySelector(".popup-img");
-const popupImgTitle = document.querySelector(".popup-img-title");
+const galleryCard = tegTemplate.querySelector(".gallery__card");
+const popupCloseBtn = document.querySelector(".popup__close");
+const popupImg = document.querySelector(".popup__img");
+const popupImgTitle = document.querySelector(".popup__img-title");
