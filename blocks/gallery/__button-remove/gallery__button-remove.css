@@ -1,0 +1,14 @@
+.gallery__button-remove {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background-image: url(../../../images/basket.svg);
+  width: 18px;
+  height: 19px;
+  margin: 0;
+  border: none;
+}
+
+.gallery__button-remove:hover {
+  scale: 1.2;
+}
