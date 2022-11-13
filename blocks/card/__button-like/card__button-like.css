@@ -1,4 +1,4 @@
-.gallery__button-like {
+.card__button-like {
   background-image: url(../../../images/heart.svg);
   width: 22px;
   height: 19px;
@@ -6,6 +6,6 @@
   border: none;
 }
 
-.gallery__button-like:hover {
+.card__button-like:hover {
   scale: 1.2;
 }

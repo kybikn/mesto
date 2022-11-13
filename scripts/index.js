@@ -1,5 +1,4 @@
 function openPopup(popup) {
-  inputName.focus();
   popup.classList.add("popup_active");
   popup.addEventListener("click", handleClosePopup);
 }
@@ -10,31 +9,31 @@ function closePopup(popup) {
 }
 
 function handleClosePopup(event) {
-  const popupClose = event.target.closest(".popup");
   if (
     event.target.classList.contains("popup_active") ||
     event.target.classList.contains("popup__close")
   ) {
+    const popupClose = event.target.closest(".popup");
     closePopup(popupClose);
   }
 }
 
-// добавляем value в попап профиля
+/** добавляем value в попап профиля */
 function addValuePopupProfile() {
   inputName.value = profileTitle.textContent;
   inputJob.value = profileSubtitle.textContent;
 }
 
-//попап редактирования профиля
-function changeValuePopupProfile(event) {
+/** попап редактирования профиля */
+function handleChangeValuePopupProfile(event) {
   event.preventDefault();
   profileTitle.textContent = inputName.value;
   profileSubtitle.textContent = inputJob.value;
   closePopup(popupProfile);
 }
 
-//попап добавления карточки места
-function addPlaceCard(event) {
+/** попап добавления карточки места */
+function handleAddPlaceCard(event) {
   event.preventDefault();
   closePopup(popupPlace);
   const card = { name: inputPlace.value, link: inputLink.value };
@@ -42,58 +41,59 @@ function addPlaceCard(event) {
   formPlace.reset();
 }
 
-// генерируем карточку
+/** генерируем карточку */
 function generateCard(item) {
-  const newCard = galleryCard.cloneNode(true); // клонируем карточку
-  const cardName = newCard.querySelector(".gallery__card-title");
+  /** клонируем карточку */
+  const newCard = card.cloneNode(true);
+  const cardName = newCard.querySelector(".card__title");
   cardName.textContent = item.name;
-  const cardLink = newCard.querySelector(".gallery__card-img");
+  const cardLink = newCard.querySelector(".card__img");
   cardLink.src = item.link;
   cardName.alt = item.name;
   cardLink.addEventListener("click", (event) => {
-    openPopup(popupPhoto);
     popupImg.src = item.link;
     popupImg.alt = item.name;
     popupImgTitle.textContent = item.name;
+    openPopup(popupPhoto);
   });
-  const cardLike = newCard.querySelector(".gallery__button-like");
-  cardLike.addEventListener("click", addLike);
-  const buttonRemove = newCard.querySelector(".gallery__button-remove");
-  buttonRemove.addEventListener("click", removeCard);
+  const cardLike = newCard.querySelector(".card__button-like");
+  cardLike.addEventListener("click", handleAddLike);
+  const buttonRemove = newCard.querySelector(".card__button-remove");
+  buttonRemove.addEventListener("click", handleRemoveCard);
   return newCard;
 }
 
-// проходим по массиву
+/** проходим по массиву */
 function render() {
   initialCards.forEach(renderCard);
 }
 
-// добавляем карточку
+/** добавляем карточку */
 function renderCard(item) {
   galleryList.prepend(generateCard(item));
 }
 render();
 
-// добавляем лайк
-function addLike(event) {
-  event.target.classList.toggle("gallery__button-like_active");
+/** добавляем лайк */
+function handleAddLike(event) {
+  event.target.classList.toggle("card__button-like_active");
 }
 
-// удаляем карточку
-function removeCard(event) {
-  event.target.closest(".gallery__card").remove();
+/** удаляем карточку */
+function handleRemoveCard(event) {
+  event.target.closest(".card").remove();
 }
 
-// открытие попапа профиля
+/** открытие попапа профиля */
 profileEditBtn.addEventListener("click", () => {
-  openPopup(popupProfile);
   addValuePopupProfile();
+  openPopup(popupProfile);
 });
 
-// открытие попапа карточки места
+/** открытие попапа карточки места */
 profileAddBtn.addEventListener("click", () => {
   openPopup(popupPlace);
 });
 
-formProfile.addEventListener("submit", changeValuePopupProfile);
-formPlace.addEventListener("submit", addPlaceCard);
+formProfile.addEventListener("submit", handleChangeValuePopupProfile);
+formPlace.addEventListener("submit", handleAddPlaceCard);
