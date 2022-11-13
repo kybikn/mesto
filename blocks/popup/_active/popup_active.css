@@ -1,9 +1,4 @@
 .popup_active {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
   opacity: 1;
   visibility: visible;
-  /* transition: opacity 1s ease 0s; */
-  /* transition: all 0.6s linear; */
 }
