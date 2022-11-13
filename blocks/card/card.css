@@ -1,4 +1,4 @@
-.gallery__card {
+.card {
   position: relative;
   margin: 0;
   border-radius: 10px;
@@ -6,7 +6,7 @@
   cursor: pointer;
 }
 
-.gallery__card:hover {
+.card:hover {
   opacity: 0.8;
   scale: 1.02;
 }
