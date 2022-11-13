@@ -19,40 +19,28 @@ function handleClosePopup(event) {
   }
 }
 
-// открытие попапа профиля
-profileEditBtn.addEventListener("click", () => {
-  openPopup(popupProfile);
+// добавляем value в попап профиля
+function addValuePopupProfile() {
   inputName.value = profileTitle.textContent;
   inputJob.value = profileSubtitle.textContent;
-});
+}
 
-//попап редактирование профиля
-function handleSubmitForm(event) {
+//попап редактирования профиля
+function changeValuePopupProfile(event) {
   event.preventDefault();
   profileTitle.textContent = inputName.value;
   profileSubtitle.textContent = inputJob.value;
   closePopup(popupProfile);
 }
 
-formProfile.addEventListener("submit", handleSubmitForm);
-
-// открытие попапа карточки места
-profileAddBtn.addEventListener("click", () => {
-  openPopup(popupPlace);
-  inputPlace.value = "";
-  inputLink.value = "";
-});
-
-//попап добавление карточки места
-function handleAddCard(event) {
+//попап добавления карточки места
+function addPlaceCard(event) {
   event.preventDefault();
   closePopup(popupPlace);
   const card = { name: inputPlace.value, link: inputLink.value };
   renderCard(card);
-  // formPlace.reset();
+  formPlace.reset();
 }
-
-formPlace.addEventListener("submit", handleAddCard);
 
 // генерируем карточку
 function generateCard(item) {
@@ -75,10 +63,16 @@ function generateCard(item) {
   return newCard;
 }
 
+// проходим по массиву
+function render() {
+  initialCards.forEach(renderCard);
+}
+
 // добавляем карточку
 function renderCard(item) {
   galleryList.prepend(generateCard(item));
 }
+render();
 
 // добавляем лайк
 function addLike(event) {
@@ -90,5 +84,16 @@ function removeCard(event) {
   event.target.closest(".gallery__card").remove();
 }
 
-// проходим по массиву
-initialCards.forEach((item) => renderCard(item));
+// открытие попапа профиля
+profileEditBtn.addEventListener("click", () => {
+  openPopup(popupProfile);
+  addValuePopupProfile();
+});
+
+// открытие попапа карточки места
+profileAddBtn.addEventListener("click", () => {
+  openPopup(popupPlace);
+});
+
+formProfile.addEventListener("submit", changeValuePopupProfile);
+formPlace.addEventListener("submit", addPlaceCard);
