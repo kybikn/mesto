@@ -1,4 +1,4 @@
-.gallery__button-remove {
+.card__button-remove {
   position: absolute;
   top: 20px;
   right: 20px;
@@ -9,6 +9,6 @@
   border: none;
 }
 
-.gallery__button-remove:hover {
+.card__button-remove:hover {
   scale: 1.2;
 }
