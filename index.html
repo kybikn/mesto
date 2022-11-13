@@ -19,10 +19,10 @@
     <main>
       <section class="profile">
         <div class="profile__content">
-          <img class="profile__img" src="./images/Kusto.jpg" alt="Жак-Ив Кусто" />
+          <img class="profile__img" src="./images/Kusto.jpg" alt="Жак-Ив Кусто">
           <div class="profile__text">
-            <div class="profile__title">
-              <h1 class="profile__title-name">Жак-Ив Кусто</h1>
+            <div class="profile__name">
+              <h1 class="profile__title">Жак-Ив Кусто</h1>
               <button class="button profile__button-edit" type="button"></button>
             </div>
             <p class="profile__subtitle">Исследователь океана</p>
@@ -30,7 +30,7 @@
           <button class="button profile__button-add" type="button"></button>
         </div>
       </section>
-      <section class="gallery">
+      <section class="gallery" aria-label="Галерея карточек">
         <ul class="gallery__list">
         </ul>
       </section>
@@ -38,13 +38,11 @@
     <footer class="footer">
       <p class="footer__text">&copy; 2022 Mesto Russia</p>
     </footer>
-
-
-    <div class="popup popup_profile">
+    <div class="popup popup-profile">
       <div class="popup__content">
         <button class="popup__close"></button>
         <h2 class="popup__title">Редактировать профиль</h2>
-        <form class="popup__form" name="popup-form">
+        <form class="popup__form-profile" name="popup-form-profile">
           <fieldset class="popup__box">
             <label>
               <span class="popup__input-close" onclick="this.nextElementSibling.value = ''">
@@ -65,12 +63,11 @@
         </form>
       </div>
     </div>
-
     <div class="popup popup-place">
       <div class="popup__content">
         <button class="popup__close"></button>
         <h2 class="popup__title">Новое место</h2>
-        <form class="popup__form-place" name="popup-form">
+        <form class="popup__form-place" name="popup-form-place">
           <fieldset class="popup__box">
             <label>
               <span class="popup__input-close" onclick="this.nextElementSibling.value = ''">
@@ -83,7 +80,7 @@
               <span class="popup__input-close" onclick="this.nextElementSibling.value = ''">
                 &times;
               </span>
-              <input class="popup__input popup__input_type_url" type="url" name="url" placeholder="Ссылка на картинку"
+              <input class="popup__input popup__input_type_link" type="url" name="url" placeholder="Ссылка на картинку"
                 autocomplete="off" required>
             </label>
           </fieldset>
@@ -91,19 +88,14 @@
         </form>
       </div>
     </div>
-
     <div class="popup popup-photo">
-      <div class="popup__content">
-        <figure>
-          <img class="popup-img" src="" alt="">
-          <button class="popup__close" type="button"></button>
-          <figcaption class="popup-img-title">
-          </figcaption>
-        </figure>
-      </div>
+      <figure class="popup__figure">
+        <img class="popup__img" src="#" alt="Карточка места">
+        <button class="popup__close" type="button"></button>
+        <figcaption class="popup__img-title">
+        </figcaption>
+      </figure>
     </div>
-
-
     <template id="card">
       <li>
         <figure class="gallery__card">
@@ -117,8 +109,8 @@
       </li>
     </template>
   </div>
-  <script src="./src/variables.js"></script>
-  <script src="./src/script.js"></script>
+  <script src="./scripts/variables.js" defer></script>
+  <script src="./scripts/script.js" defer></script>
 </body>
 
 </html>
