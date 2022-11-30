@@ -9,6 +9,9 @@
   <link rel="stylesheet" href="./pages/index.css">
   <link rel="icon" href="./images/favicon.ico">
   <title>Mesto</title>
+  <script src="./scripts/variables.js" defer></script>
+  <script src="./scripts/index.js" defer></script>
+  <script src="./scripts/validate.js" defer></script>
 </head>
 
 <body class="root">
@@ -42,24 +45,26 @@
       <div class="popup__content">
         <button class="popup__close"></button>
         <h2 class="popup__title">Редактировать профиль</h2>
-        <form class="popup__form-profile" name="popup-form-profile">
+        <form class="popup__form popup__form-profile" name="popup__form-profile" novalidate>
           <fieldset class="popup__box">
             <label>
-              <span class="popup__input-close" onclick="this.nextElementSibling.value = ''">
+              <span class="popup__input-close popup__input-name-close">
                 &times;
               </span>
-              <input class="popup__input popup__input_type_name" type="text" name="name" placeholder="Ваше имя"
-                autocomplete="off" required>
+              <input class="popup__input popup__input_type_name" id="popup__input-name" type="text" name="name"
+                placeholder="Ваше имя" minlength="2" maxlength="40" required>
+              <span class="popup__input-error popup__input-name-error"></span>
             </label>
             <label>
-              <span class="popup__input-close" onclick="this.nextElementSibling.value = ''">
+              <span class="popup__input-close popup__input-job-close">
                 &times;
               </span>
-              <input class="popup__input popup__input_type_job" type="text" name="job" placeholder="Ваша профессия"
-                autocomplete="off" required>
+              <input class="popup__input popup__input_type_job" id="popup__input-job" type="text" name="job"
+                placeholder="Ваша профессия" minlength="2" maxlength="200" required>
+              <span class="popup__input-error popup__input-job-error"></span>
             </label>
           </fieldset>
-          <button class="popup__button" type="submit">Сохранить</button>
+          <button class="popup__button" id="popup__button-profile" type="submit">Сохранить</button>
         </form>
       </div>
     </div>
@@ -67,24 +72,26 @@
       <div class="popup__content">
         <button class="popup__close"></button>
         <h2 class="popup__title">Новое место</h2>
-        <form class="popup__form-place" name="popup-form-place">
+        <form class="popup__form popup__form-place" name="popup__form-place" novalidate>
           <fieldset class="popup__box">
             <label>
-              <span class="popup__input-close" onclick="this.nextElementSibling.value = ''">
+              <span class="popup__input-close popup__input-place-close">
                 &times;
               </span>
-              <input class="popup__input popup__input_type_place" type="text" name="place" placeholder="Название"
-                autocomplete="off" required>
+              <input class="popup__input popup__input_type_place" id="popup__input-place" type="text" name="place"
+                placeholder="Название" minlength="2" maxlength="30" required>
+              <span class="popup__input-error popup__input-place-error"></span>
             </label>
             <label>
-              <span class="popup__input-close" onclick="this.nextElementSibling.value = ''">
+              <span class="popup__input-close popup__input-url-close">
                 &times;
               </span>
-              <input class="popup__input popup__input_type_link" type="url" name="url" placeholder="Ссылка на картинку"
-                autocomplete="off" required>
+              <input class="popup__input popup__input_type_link" id="popup__input-url" type="url" name="url"
+                placeholder="Ссылка на картинку" required>
+              <span class="popup__input-error popup__input-url-error"></span>
             </label>
           </fieldset>
-          <button class="popup__button" type="submit">Создать</button>
+          <button class="popup__button" id="popup__button-place" type="submit">Создать</button>
         </form>
       </div>
     </div>
@@ -108,10 +115,7 @@
         </figure>
       </li>
     </template>
-
   </div>
-  <script src="./scripts/variables.js" defer></script>
-  <script src="./scripts/index.js" defer></script>
 </body>
 
 </html>
