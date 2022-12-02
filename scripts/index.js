@@ -104,13 +104,18 @@ function openPopupPhoto(item) {
 profileEditBtn.addEventListener("click", () => {
   addValuePopupProfile();
   openPopup(popupProfile);
+  /** убираем ошибки при повторном открытии после стирания данных */
+  const formElement = popupProfile.querySelector(formParameters.formSelector);
+  checkFormValidity(formElement, formParameters);
 });
 
 /** открытие попапа карточки места */
 profileAddBtn.addEventListener("click", () => {
   openPopup(popupPlace);
   /** делаем кнопку неактивной */
-  const buttonElement = popupPlace.querySelector(".popup__button");
+  const buttonElement = popupPlace.querySelector(
+    formParameters.submitButtonSelector
+  );
   buttonElement.classList.add(formParameters.inactiveButtonClass);
   buttonElement.disabled = true;
 });

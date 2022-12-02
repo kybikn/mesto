@@ -91,7 +91,7 @@ function hideInputError(formElement, inputElement, formParameters) {
 }
 
 /**
- * Функция проверки валидности поля
+ * Функция проверки валидности поля и отображения ошибки в случае ее наличия
  * @constructor
  * @param {HTMLFormElement} formElement - форма
  * @param {HTMLInputElement} inputElement - инпут
@@ -105,6 +105,29 @@ function checkInputValidity(formElement, inputElement, formParameters) {
     /** Если проходит, скроем */
     hideInputError(formElement, inputElement, formParameters);
   }
+}
+
+/**
+ * Функция проверки валидности формы и корректировки состояния инпутов и кнопки
+ * @constructor
+ * @param {HTMLFormElement} formElement - форма
+ * @param {Object} formParameters - объект с данными о форме
+ */
+function checkFormValidity(formElement, formParameters) {
+  /** Находим все поля внутри формы, сделаем из них массив методом Array.from */
+  const inputList = Array.from(
+    formElement.querySelectorAll(formParameters.inputSelector)
+  );
+  /** Найдём в текущей форме кнопку отправки */
+  const buttonElement = formElement.querySelector(
+    formParameters.submitButtonSelector
+  );
+  inputList.forEach((inputElement) => {
+    /** Вызовем функцию checkInputValidity, передав ей форму и проверяемый элемент */
+    checkInputValidity(formElement, inputElement, formParameters);
+  });
+  /** Вызовем toggleButtonState, передав ей массив полей и кнопку */
+  toggleButtonState(inputList, buttonElement, formParameters);
 }
 
 /**
