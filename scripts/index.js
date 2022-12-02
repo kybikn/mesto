@@ -109,6 +109,10 @@ profileEditBtn.addEventListener("click", () => {
 /** открытие попапа карточки места */
 profileAddBtn.addEventListener("click", () => {
   openPopup(popupPlace);
+  /** делаем кнопку неактивной */
+  const buttonElement = popupPlace.querySelector(".popup__button");
+  buttonElement.classList.add(formParameters.inactiveButtonClass);
+  buttonElement.disabled = true;
 });
 
 formProfile.addEventListener("submit", handleChangeValuePopupProfile);
