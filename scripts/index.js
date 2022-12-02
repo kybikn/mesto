@@ -1,13 +1,18 @@
+/** окрываем попап */
 function openPopup(popup) {
   popup.classList.add("popup_active");
   popup.addEventListener("click", handleClosePopup);
+  document.addEventListener("keydown", handleClosePopupEsc);
 }
 
+/** закрываем попап */
 function closePopup(popup) {
   popup.classList.remove("popup_active");
   popup.removeEventListener("click", handleClosePopup);
+  document.removeEventListener("keydown", handleClosePopupEsc);
 }
 
+/** закрываем попап по крестику и оверлею */
 function handleClosePopup(event) {
   if (
     event.target.classList.contains("popup_active") ||
@@ -15,6 +20,14 @@ function handleClosePopup(event) {
   ) {
     const popupClose = event.target.closest(".popup");
     closePopup(popupClose);
+  }
+}
+
+/** закрываем попап по esc */
+function handleClosePopupEsc(event) {
+  if (event.key === "Escape") {
+    const popupCloseEsc = document.querySelector(".popup_active");
+    closePopup(popupCloseEsc);
   }
 }
 
@@ -50,12 +63,7 @@ function generateCard(item) {
   const cardLink = newCard.querySelector(".card__img");
   cardLink.src = item.link;
   cardName.alt = item.name;
-  cardLink.addEventListener("click", (event) => {
-    popupImg.src = item.link;
-    popupImg.alt = item.name;
-    popupImgTitle.textContent = item.name;
-    openPopup(popupPhoto);
-  });
+  cardLink.addEventListener("click", () => openPopupPhoto(item));
   const cardLike = newCard.querySelector(".card__button-like");
   cardLike.addEventListener("click", handleAddLike);
   const buttonRemove = newCard.querySelector(".card__button-remove");
@@ -82,6 +90,14 @@ function handleAddLike(event) {
 /** удаляем карточку */
 function handleRemoveCard(event) {
   event.target.closest(".card").remove();
+}
+
+/** открываем попап фото */
+function openPopupPhoto(item) {
+  popupImg.src = item.link;
+  popupImg.alt = item.name;
+  popupImgTitle.textContent = item.name;
+  openPopup(popupPhoto);
 }
 
 /** открытие попапа профиля */

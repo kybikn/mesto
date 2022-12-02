@@ -25,6 +25,14 @@ const initialCards = [
   },
 ];
 
+const formParameters = {
+  formSelector: ".popup__form",
+  inputSelector: ".popup__input",
+  submitButtonSelector: ".popup__button",
+  inactiveButtonClass: "popup__button_disabled",
+  inputErrorClass: "popup__input-error",
+};
+
 const profileEditBtn = document.querySelector(".profile__button-edit");
 const profileAddBtn = document.querySelector(".profile__button-add");
 const profileTitle = document.querySelector(".profile__title");
