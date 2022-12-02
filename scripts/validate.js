@@ -107,5 +107,38 @@ function checkInputValidity(formElement, inputElement, formParameters) {
   }
 }
 
+/**
+ * Функция проверяет наличие невалидного поля и сигнализирует, можно ли разблокировать кнопку сабмита
+ * @constructor
+ * @param {HTMLInputElement} inputList - массив полей
+ */
+function hasInvalidInput(inputList) {
+  /** проходим по этому массиву методом some */
+  return inputList.some((inputElement) => {
+    /** Если поле не валидно, колбэк вернёт true, обход массива прекратится и вся функция hasInvalidInput вернёт true */
+    return !inputElement.validity.valid;
+  });
+}
+
+/**
+ * Функция блокировки кнопки отправки
+ * @constructor
+ * @param {array} inputList - массив полей
+ * @param {HTMLButtonElement} buttonElement - кнопка отправки
+ * @param {Object} formParameters - обьект с данными о форме
+ */
+function toggleButtonState(inputList, buttonElement, formParameters) {
+  /** Если есть хотя бы один невалидный инпут */
+  if (hasInvalidInput(inputList)) {
+    /** сделай кнопку неактивной */
+    buttonElement.classList.add(formParameters.inactiveButtonClass);
+    buttonElement.disabled = true;
+  } else {
+    /** иначе сделай кнопку активной */
+    buttonElement.classList.remove(formParameters.inactiveButtonClass);
+    buttonElement.disabled = false;
+  }
+}
+
 /** вызов функция валидации всех форм */
 enableValidation(formParameters);
