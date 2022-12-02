@@ -54,5 +54,58 @@ function setEventListeners(formElement, formParameters) {
   });
 }
 
+/**
+ * Функция добавления класса с ошибкой
+ * @constructor
+ * @param {HTMLFormElement} formElement - форма
+ * @param {HTMLInputElement} inputElement - инпут
+ * @param {Object} formParameters - объект с данными о форме
+ */
+function showInputError(formElement, inputElement, formParameters) {
+  /** Добавляем инпуту класс ошибки */
+  inputElement.classList.add(formParameters.inputErrorClass);
+  /** Находим элемент для текста ошибки (span под инпутом) */
+  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+  /** Установим содержимое элемента для текста ошибки (span) на родное сообщение об ошибке для данного браузера. validationMessage - это свойство самого инпута (https://developer.mozilla.org/en-US/docs/Learn/Forms/Form_validation#validating_forms_using_javascript) */
+  errorElement.textContent = inputElement.validationMessage;
+  /** Показываем сообщение об ошибке */
+  errorElement.classList.add(formParameters.inputErrorClass);
+}
+
+/**
+ * Функция удаления класса с ошибкой
+ * @constructor
+ * @param {HTMLFormElement} formElement - форма
+ * @param {HTMLInputElement} inputElement - инпут
+ * @param {Object} formParameters - объект с данными о форме
+ */
+function hideInputError(formElement, inputElement, formParameters) {
+  /** Удаляем у инпута класс ошибки */
+  inputElement.classList.remove(formParameters.inputErrorClass);
+  /** Находим элемент для текста ошибки (span под инпутом) */
+  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+  /** Скрываем сообщение об ошибке */
+  errorElement.classList.remove(formParameters.inputErrorClass);
+  /** Очистим ошибку */
+  errorElement.textContent = "";
+}
+
+/**
+ * Функция проверки валидности поля
+ * @constructor
+ * @param {HTMLFormElement} formElement - форма
+ * @param {HTMLInputElement} inputElement - инпут
+ * @param {Object} formParameters - объект с данными о форме
+ */
+function checkInputValidity(formElement, inputElement, formParameters) {
+  if (!inputElement.validity.valid) {
+    /** Если поле не проходит валидацию, покажем ошибку */
+    showInputError(formElement, inputElement, formParameters);
+  } else {
+    /** Если проходит, скроем */
+    hideInputError(formElement, inputElement, formParameters);
+  }
+}
+
 /** вызов функция валидации всех форм */
 enableValidation(formParameters);
