@@ -116,8 +116,7 @@ profileAddBtn.addEventListener("click", () => {
   const buttonElement = popupPlace.querySelector(
     formParameters.submitButtonSelector
   );
-  buttonElement.classList.add(formParameters.inactiveButtonClass);
-  buttonElement.disabled = true;
+  disableButton(buttonElement, formParameters);
 });
 
 formProfile.addEventListener("submit", handleChangeValuePopupProfile);

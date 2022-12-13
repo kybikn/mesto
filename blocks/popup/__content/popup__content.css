@@ -10,7 +10,8 @@
   -ms-flex-pack: justify;
   justify-content: space-between;
   position: relative;
-  width: 430px;
+  max-width: 430px;
+  width: 100%;
   padding: 34px 36px 38px;
   border-radius: 10px;
   -webkit-box-sizing: border-box;
@@ -22,7 +23,7 @@
 
 @media screen and (max-width: 618px) {
   .popup__content {
-    width: 282px;
+    max-width: 282px;
     padding: 25px 22px;
   }
 }
