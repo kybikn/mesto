@@ -146,20 +146,40 @@ function hasInvalidInput(inputList) {
 /**
  * Функция блокировки кнопки отправки
  * @constructor
+ * @param {HTMLButtonElement} buttonElement - кнопка отправки
+ * @param {Object} formParameters - объект с данными о форме
+ */
+function disableButton(buttonElement, formParameters) {
+  buttonElement.classList.add(formParameters.inactiveButtonClass);
+  buttonElement.disabled = true;
+}
+
+/**
+ * Функция разблокировки кнопки отправки
+ * @constructor
+ * @param {HTMLButtonElement} buttonElement - кнопка отправки
+ * @param {Object} formParameters - объект с данными о форме
+ */
+function enableButton(buttonElement, formParameters) {
+  buttonElement.classList.remove(formParameters.inactiveButtonClass);
+  buttonElement.disabled = false;
+}
+
+/**
+ * Функция переключения кнопки отправки
+ * @constructor
  * @param {array} inputList - массив полей
  * @param {HTMLButtonElement} buttonElement - кнопка отправки
- * @param {Object} formParameters - обьект с данными о форме
+ * @param {Object} formParameters - объект с данными о форме
  */
 function toggleButtonState(inputList, buttonElement, formParameters) {
   /** Если есть хотя бы один невалидный инпут */
   if (hasInvalidInput(inputList)) {
     /** сделай кнопку неактивной */
-    buttonElement.classList.add(formParameters.inactiveButtonClass);
-    buttonElement.disabled = true;
+    disableButton(buttonElement, formParameters);
   } else {
     /** иначе сделай кнопку активной */
-    buttonElement.classList.remove(formParameters.inactiveButtonClass);
-    buttonElement.disabled = false;
+    enableButton(buttonElement, formParameters);
   }
 }
 
