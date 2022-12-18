@@ -38,6 +38,19 @@ class FormValidator {
     this._toggleButtonState();
   }
 
+  /** Метод очистки полей с ошибкой и дезактивации кнопки */
+  resetValidation() {
+    /** обходим все поля внутри формы */
+    this._inputList.forEach((inputElement) => {
+      /** делаем поля пустыми */
+      inputElement.value = "";
+      /** убираем ошибки */
+      this._hideInputError(inputElement);
+    });
+    /** делаем кнопку неактивной */
+    this.disableButton();
+  }
+
   /** Метод добавления класса с ошибкой */
   _showInputError(inputElement) {
     /** добавляем инпуту класс ошибки */
@@ -79,10 +92,10 @@ class FormValidator {
   _toggleButtonState() {
     /** если есть хотя бы один невалидный инпут */
     if (this._hasInvalidInput(this._inputList)) {
-      /** сделай кнопку неактивной */
+      /** сделать кнопку неактивной */
       this.disableButton();
     } else {
-      /** иначе сделай кнопку активной */
+      /** иначе сделать кнопку активной */
       this._enableButton();
     }
   }
