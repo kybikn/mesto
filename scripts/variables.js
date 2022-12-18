@@ -1,4 +1,4 @@
-const initialCards = [
+export const initialCards = [
   {
     name: "Карачаево-Черкессия",
     link: "./images/Karachay-Cherkessia.jpg",
@@ -25,7 +25,7 @@ const initialCards = [
   },
 ];
 
-const formParameters = {
+export const formParameters = {
   formSelector: ".popup__form",
   inputSelector: ".popup__input",
   submitButtonSelector: ".popup__button",
@@ -33,23 +33,37 @@ const formParameters = {
   inputErrorClass: "popup__input-error",
 };
 
-const profileEditBtn = document.querySelector(".profile__button-edit");
-const profileAddBtn = document.querySelector(".profile__button-add");
-const profileTitle = document.querySelector(".profile__title");
-const profileSubtitle = document.querySelector(".profile__subtitle");
-const popup = document.querySelector(".popup");
-const popupProfile = document.querySelector(".popup_type_profile");
-const popupPlace = document.querySelector(".popup_type_place");
-const popupPhoto = document.querySelector(".popup_type_photo");
-const formProfile = document.querySelector(".popup__form-profile");
-const formPlace = document.querySelector(".popup__form-place");
-const inputName = document.querySelector(".popup__input_type_name");
-const inputJob = document.querySelector(".popup__input_type_job");
-const inputPlace = document.querySelector(".popup__input_type_place");
-const inputLink = document.querySelector(".popup__input_type_link");
-const galleryList = document.querySelector(".gallery__list");
-const tegTemplate = document.querySelector("#card").content;
-const card = tegTemplate.querySelector(".card");
-const popupCloseBtn = document.querySelector(".popup__close");
-const popupImg = document.querySelector(".popup__img");
-const popupImgTitle = document.querySelector(".popup__img-title");
+export const cardParameters = {
+  imgSelector: ".card__img",
+  titleSelector: ".card__title",
+  likeButtonSelector: ".card__button-like",
+  activeButtonClass: "card__button-like_active",
+  removeButtonSelector: ".card__button-remove",
+};
+
+export const popupParameters = {
+  popupSelector: ".popup",
+  activePopupSelector: ".popup_active",
+  activePopupClass: "popup_active",
+  closeButtonClass: "popup__close",
+};
+
+export const profileEditBtn = document.querySelector(".profile__button-edit");
+export const profileAddBtn = document.querySelector(".profile__button-add");
+export const profileTitle = document.querySelector(".profile__title");
+export const profileSubtitle = document.querySelector(".profile__subtitle");
+export const popupProfile = document.querySelector(".popup_type_profile");
+export const popupPlace = document.querySelector(".popup_type_place");
+export const popupPhoto = document.querySelector(".popup_type_photo");
+export const formProfile = document.querySelector(".popup__form-profile");
+export const formPlace = document.querySelector(".popup__form-place");
+export const inputName = document.querySelector(".popup__input_type_name");
+export const inputJob = document.querySelector(".popup__input_type_job");
+export const inputPlace = document.querySelector(".popup__input_type_place");
+export const inputLink = document.querySelector(".popup__input_type_link");
+export const galleryList = document.querySelector(".gallery__list");
+export const tegTemplate = document.querySelector("#card").content;
+export const cardTemplate = tegTemplate.querySelector(".card");
+export const popupCloseBtn = document.querySelector(".popup__close");
+export const popupImg = document.querySelector(".popup__img");
+export const popupImgTitle = document.querySelector(".popup__img-title");
