@@ -41,6 +41,13 @@ export const cardParameters = {
   removeButtonSelector: ".card__button-remove",
 };
 
+export const popupParameters = {
+  popupSelector: ".popup",
+  activePopupSelector: ".popup_active",
+  activePopupClass: "popup_active",
+  closeButtonClass: "popup__close",
+};
+
 export const profileEditBtn = document.querySelector(".profile__button-edit");
 export const profileAddBtn = document.querySelector(".profile__button-add");
 export const profileTitle = document.querySelector(".profile__title");

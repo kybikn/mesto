@@ -18,39 +18,12 @@ import {
   inputLink,
   galleryList,
 } from "./variables.js";
-
-/** Функция окрытия попапа */
-function openPopup(popup) {
-  popup.classList.add("popup_active");
-  popup.addEventListener("click", handleClosePopup);
-  document.addEventListener("keydown", handleClosePopupEsc);
-}
-
-/** Функция закрытия попапа */
-function closePopup(popup) {
-  popup.classList.remove("popup_active");
-  popup.removeEventListener("click", handleClosePopup);
-  document.removeEventListener("keydown", handleClosePopupEsc);
-}
-
-/** Функция закрытия попапа по крестику и оверлею */
-function handleClosePopup(event) {
-  if (
-    event.target.classList.contains("popup_active") ||
-    event.target.classList.contains("popup__close")
-  ) {
-    const popupClose = event.target.closest(".popup");
-    closePopup(popupClose);
-  }
-}
-
-/** Функция закрытия попапа по esc */
-function handleClosePopupEsc(event) {
-  if (event.key === "Escape") {
-    const popupCloseEsc = document.querySelector(".popup_active");
-    closePopup(popupCloseEsc);
-  }
-}
+import {
+  openPopup,
+  closePopup,
+  handleClosePopup,
+  handleClosePopupEsc,
+} from "./popup.js";
 
 /** Функция добавления value в попап профиля */
 function addValuePopupProfile() {

@@ -1,4 +1,6 @@
-import { openPopup } from "./index.js";
+// Спасибо Вам большое, что проверяете мою работу. Очень жду как можно больше Ваших советов и замечаний по улучшению кода.
+
+import { openPopup } from "./popup.js";
 import {
   popupImg,
   popupImgTitle,
