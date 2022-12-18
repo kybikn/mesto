@@ -39,6 +39,11 @@ export const cardParameters = {
   likeButtonSelector: ".card__button-like",
   activeButtonClass: "card__button-like_active",
   removeButtonSelector: ".card__button-remove",
+  templateSelector: "#card",
+  cardSelector: ".card",
+  cardPopupSelector: ".popup_type_photo",
+  popupImgSelector: ".popup__img",
+  popupImgTitleSelector: ".popup__img-title",
 };
 
 export const popupParameters = {
@@ -54,7 +59,6 @@ export const profileTitle = document.querySelector(".profile__title");
 export const profileSubtitle = document.querySelector(".profile__subtitle");
 export const popupProfile = document.querySelector(".popup_type_profile");
 export const popupPlace = document.querySelector(".popup_type_place");
-export const popupPhoto = document.querySelector(".popup_type_photo");
 export const formProfile = document.querySelector(".popup__form-profile");
 export const formPlace = document.querySelector(".popup__form-place");
 export const inputName = document.querySelector(".popup__input_type_name");
@@ -62,8 +66,4 @@ export const inputJob = document.querySelector(".popup__input_type_job");
 export const inputPlace = document.querySelector(".popup__input_type_place");
 export const inputLink = document.querySelector(".popup__input_type_link");
 export const galleryList = document.querySelector(".gallery__list");
-export const tegTemplate = document.querySelector("#card").content;
-export const cardTemplate = tegTemplate.querySelector(".card");
 export const popupCloseBtn = document.querySelector(".popup__close");
-export const popupImg = document.querySelector(".popup__img");
-export const popupImgTitle = document.querySelector(".popup__img-title");

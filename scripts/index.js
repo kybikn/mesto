@@ -18,12 +18,7 @@ import {
   inputLink,
   galleryList,
 } from "./variables.js";
-import {
-  openPopup,
-  closePopup,
-  handleClosePopup,
-  handleClosePopupEsc,
-} from "./popup.js";
+import { openPopup, closePopup } from "./popup.js";
 
 /** Функция добавления value в попап профиля */
 function addValuePopupProfile() {
@@ -58,20 +53,24 @@ profileEditBtn.addEventListener("click", () => {
 
 /** Функция открытия попапа карточки места */
 profileAddBtn.addEventListener("click", () => {
+  placeFormValidator.resetValidation();
   openPopup(popupPlace);
-  /** делаем кнопку неактивной */
-  placeFormValidator.disableButton();
 });
 
-/** Функция прохождения по массиву карточек */
-function render() {
-  initialCards.forEach(renderCard);
+/** Функция создания карточки */
+function createCard(cardData) {
+  const card = new Card(cardData, cardParameters, openPopup);
+  return card.generateCard();
 }
 
-/** Функция добавления карточки */
+/** Функция рендеринга карточки */
 function renderCard(cardData) {
-  const card = new Card(cardData, cardParameters);
-  galleryList.prepend(card.getView());
+  galleryList.prepend(createCard(cardData));
+}
+
+/** Функция рендеринга карточек */
+function render() {
+  initialCards.forEach(renderCard);
 }
 render();
 
@@ -86,5 +85,3 @@ profileFormValidator.enableValidation();
 /** Добавляем валидацию для формы места */
 const placeFormValidator = new FormValidator(formParameters, formPlace);
 placeFormValidator.enableValidation();
-
-export { openPopup, closePopup, handleClosePopup, handleClosePopupEsc };
