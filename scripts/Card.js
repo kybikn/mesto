@@ -1,7 +1,5 @@
-// Спасибо Вам большое за качественную проверку моей работы. Если у Вас есть еще советы и замечания - буду благодарна.
-
 class Card {
-  constructor(cardData, cardParameters, openPopup) {
+  constructor(cardData, cardParameters, openPopup, handleCardClick) {
     this._name = cardData.name;
     this._link = cardData.link;
     this._imgSelector = cardParameters.imgSelector;
@@ -12,12 +10,13 @@ class Card {
     this._templateSelector = cardParameters.templateSelector;
     this._cardSelector = cardParameters.cardSelector;
     this._cardPopup = document.querySelector(cardParameters.cardPopupSelector);
-    this._popupImg = document.querySelector(cardParameters.popupImgSelector);
-    this._popupImgTitle = document.querySelector(
-      cardParameters.popupImgTitleSelector
-    );
-    // универсальная функция для открытия попапов
+    // this._popupImg = document.querySelector(cardParameters.popupImgSelector);
+    // this._popupImgTitle = document.querySelector(
+    //   cardParameters.popupImgTitleSelector
+    // );
+
     this._openPopup = openPopup;
+    this._handleCardClick = handleCardClick;
   }
 
   /** Метод генерации карточки */
@@ -62,18 +61,18 @@ class Card {
   _setEventListeners() {
     this._buttonRemove.addEventListener("click", () => this._removeCard());
     this._cardLike.addEventListener("click", () => this._handleAddLike());
-    this._cardImage.addEventListener("click", () => this._handleCardClick());
+    this._cardImage.addEventListener("click", () => {
+      this._handleCardClick(this._name, this._link);
+    });
   }
 
-  /** Метод обработки клика на карточку для открытия попапа фото.
-   * Он специфичный для карточки, поэтому является методом карточки.
-   * Вызывает универсальную функцию openPopup, полученную в конструктор при вызове из index.js */
-  _handleCardClick() {
-    this._popupImg.src = this._link;
-    this._popupImg.alt = this._name;
-    this._popupImgTitle.textContent = this._name;
-    this._openPopup(this._cardPopup);
-  }
+  /** Метод обработки клика на карточку для открытия попапа фото */
+  // _handleCardClick() {
+  //   this._popupImg.src = this._link;
+  //   this._popupImg.alt = this._name;
+  //   this._popupImgTitle.textContent = this._name;
+  //   this._openPopup(this._cardPopup);
+  // }
 
   /** Метод создания карточки */
   generateCard() {

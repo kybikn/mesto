@@ -42,8 +42,8 @@ export const cardParameters = {
   templateSelector: "#card",
   cardSelector: ".card",
   cardPopupSelector: ".popup_type_photo",
-  popupImgSelector: ".popup__img",
-  popupImgTitleSelector: ".popup__img-title",
+  // popupImgSelector: ".popup__img",
+  // popupImgTitleSelector: ".popup__img-title",
 };
 
 export const popupParameters = {
@@ -52,6 +52,10 @@ export const popupParameters = {
   activePopupClass: "popup_active",
   closeButtonClass: "popup__close",
 };
+
+export const popupImg = document.querySelector(".popup__img");
+export const popupImgTitle = document.querySelector(".popup__img-title");
+export const popupPhoto = document.querySelector(".popup_type_photo");
 
 export const profileEditBtn = document.querySelector(".profile__button-edit");
 export const profileAddBtn = document.querySelector(".profile__button-add");
