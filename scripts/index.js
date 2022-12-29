@@ -1,6 +1,8 @@
 import { Card } from "./Card.js";
 import { FormValidator } from "./FormValidator.js";
 import {
+  popupImg,
+  popupImgTitle,
   initialCards,
   cardParameters,
   formParameters,
@@ -17,6 +19,7 @@ import {
   inputPlace,
   inputLink,
   galleryList,
+  popupPhoto,
 } from "./variables.js";
 import { openPopup, closePopup } from "./popup.js";
 
@@ -57,9 +60,17 @@ profileAddBtn.addEventListener("click", () => {
   openPopup(popupPlace);
 });
 
+/** Функция открытия попапа фото ? */
+function handleCardClick(name, link) {
+  popupImg.src = link;
+  popupImg.alt = name;
+  popupImgTitle.textContent = name;
+  openPopup(popupPhoto);
+}
+
 /** Функция создания карточки */
 function createCard(cardData) {
-  const card = new Card(cardData, cardParameters, openPopup);
+  const card = new Card(cardData, cardParameters, openPopup, handleCardClick);
   return card.generateCard();
 }
 
