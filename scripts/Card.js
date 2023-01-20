@@ -1,5 +1,5 @@
 class Card {
-  constructor(cardData, cardParameters, openPopup, handleCardClick) {
+  constructor(cardData, cardParameters, handleCardClick) {
     this._name = cardData.name;
     this._link = cardData.link;
     this._imgSelector = cardParameters.imgSelector;
@@ -10,12 +10,6 @@ class Card {
     this._templateSelector = cardParameters.templateSelector;
     this._cardSelector = cardParameters.cardSelector;
     this._cardPopup = document.querySelector(cardParameters.cardPopupSelector);
-    // this._popupImg = document.querySelector(cardParameters.popupImgSelector);
-    // this._popupImgTitle = document.querySelector(
-    //   cardParameters.popupImgTitleSelector
-    // );
-
-    this._openPopup = openPopup;
     this._handleCardClick = handleCardClick;
   }
 
@@ -65,14 +59,6 @@ class Card {
       this._handleCardClick(this._name, this._link);
     });
   }
-
-  /** Метод обработки клика на карточку для открытия попапа фото */
-  // _handleCardClick() {
-  //   this._popupImg.src = this._link;
-  //   this._popupImg.alt = this._name;
-  //   this._popupImgTitle.textContent = this._name;
-  //   this._openPopup(this._cardPopup);
-  // }
 
   /** Метод создания карточки */
   generateCard() {

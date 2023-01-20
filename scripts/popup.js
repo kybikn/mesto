@@ -1,39 +1,54 @@
-// Данные функции я вынесла в отдельный файл, тк предполагаю, что в дальнейшем они будут переделаны в класс Popup
-import { popupParameters } from "./variables.js";
-
-/** Функция окрытия попапа */
-function openPopup(popup) {
-  popup.classList.add(popupParameters.activePopupClass);
-  popup.addEventListener("click", handleClosePopup);
-  document.addEventListener("keydown", handleClosePopupEsc);
-}
-
-/** Функция закрытия попапа */
-function closePopup(popup) {
-  popup.classList.remove(popupParameters.activePopupClass);
-  popup.removeEventListener("click", handleClosePopup);
-  document.removeEventListener("keydown", handleClosePopupEsc);
-}
-
-/** Функция закрытия попапа по крестику и оверлею */
-function handleClosePopup(event) {
-  if (
-    event.target.classList.contains(popupParameters.activePopupClass) ||
-    event.target.classList.contains(popupParameters.closeButtonClass)
-  ) {
-    const popupClose = event.target.closest(popupParameters.popupSelector);
-    closePopup(popupClose);
+class Popup {
+  constructor(popupSelector) {
+    this._popupSelector = popupSelector;
+    this._popup = document.querySelector(popupSelector);
+    this._activePopupClass = "popup_active";
+    this._closeButtonClass = "popup__close";
+    this._handleEscClose = this._handleEscClose.bind(this);
+    this._handleClosePopup = this._handleClosePopup.bind(this);
   }
-}
 
-/** Функция закрытия попапа по esc */
-function handleClosePopupEsc(event) {
-  if (event.key === "Escape") {
-    const popupCloseEsc = document.querySelector(
-      popupParameters.activePopupSelector
+  /** Функция окрытия попапа */
+  open() {
+    this._popup.classList.add(this._activePopupClass);
+    this._popup.addEventListener("click", this._handleClosePopup);
+    document.addEventListener("keydown", this._handleEscClose);
+  }
+
+  /** Функция закрытия попапа */
+  close() {
+    this._popup.classList.remove(this._activePopupClass);
+    this._popup.removeEventListener("click", this._handleClosePopup);
+    document.removeEventListener("keydown", this._handleEscClose);
+  }
+
+  /** Функция закрытия попапа по крестику и оверлею */
+  _handleClosePopup(event) {
+    if (
+      event.target.classList.contains(this._activePopupClass) ||
+      event.target.classList.contains(this._closeButtonClass)
+    ) {
+      const popupClose = event.target.closest(this._popupSelector);
+      this.close(popupClose);
+    }
+  }
+
+  /** Функция закрытия попапа по esc */
+  _handleEscClose(event) {
+    if (event.key === "Escape") {
+      const popupCloseEsc = document.querySelector(
+        `.${this._activePopupClass}`
+      );
+      this.close(popupCloseEsc);
+    }
+  }
+
+  /** Слушатель закрытия попапа */
+  setEventListeners() {
+    this._popup.addEventListener("click", (event) =>
+      this._handleClosePopup(event)
     );
-    closePopup(popupCloseEsc);
   }
 }
 
-export { openPopup, closePopup, handleClosePopup, handleClosePopupEsc };
+export { Popup };
