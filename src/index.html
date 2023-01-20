@@ -6,10 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="author" content="Анастасия Кубатина">
-  <link rel="stylesheet" href="./pages/index.css">
-  <link rel="icon" href="./images/favicon.ico">
+  <link rel="icon" href="<%=require('./images/favicon.ico')%>">
   <title>Mesto</title>
-  <script type="module" src="./scripts/index.js" defer></script>
 </head>
 
 <body class="root">
@@ -20,7 +18,7 @@
     <main>
       <section class="profile">
         <div class="profile__content">
-          <img class="profile__img" src="./images/Kusto.jpg" alt="Жак-Ив Кусто">
+          <img class="profile__img" src="<%=require('./images/Kusto.jpg')%>" alt="Жак-Ив Кусто">
           <div class="profile__text">
             <div class="profile__name">
               <h1 class="profile__title">Жак-Ив Кусто</h1>
