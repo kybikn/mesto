@@ -1,9 +1,10 @@
-import { Card } from "./Card.js";
-import { FormValidator } from "./FormValidator.js";
-import { PopupWithForm } from "./PopupWithForm.js";
-import { PopupWithImage } from "./PopupWithImage.js";
-import { Section } from "./Section.js";
-import { UserInfo } from "./UserInfo.js";
+import './pages/index.css'; // добавьте импорт главного файла стилей
+import { Card } from './scripts/Card.js';
+import { FormValidator } from './scripts/FormValidator.js';
+import { PopupWithForm } from './scripts/PopupWithForm.js';
+import { PopupWithImage } from './scripts/PopupWithImage.js';
+import { Section } from './scripts/Section.js';
+import { UserInfo } from './scripts/UserInfo.js';
 
 import {
   popupImg,
@@ -20,7 +21,7 @@ import {
   inputJob,
   inputPlace,
   inputLink,
-} from "./variables.js";
+} from './variables.js';
 
 // ----------------Инстансы------------------
 /** Инстанс попапа профиля */
@@ -45,7 +46,7 @@ const popupPhotoInstance = new PopupWithImage(
 /** Инстанс Section */
 const section = new Section(
   { items: initialCards, renderer: renderer },
-  ".gallery__list"
+  '.gallery__list'
 );
 
 /** Инстанс UserInfo */
@@ -108,13 +109,13 @@ section.renderItems();
 
 // ----------------Слушатели------------------
 /** Слушатель и функция открытия попапа карточки места */
-profileAddBtn.addEventListener("click", () => {
+profileAddBtn.addEventListener('click', () => {
   placeFormValidator.resetValidation();
   popupPlaceInstance.open();
 });
 
 /** Слушатель и функция открытия попапа профиля */
-profileEditBtn.addEventListener("click", () => {
+profileEditBtn.addEventListener('click', () => {
   addValuePopupProfile();
   popupProfileInstance.open();
   /** убираем ошибки при повторном открытии после стирания данных */
