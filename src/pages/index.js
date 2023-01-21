@@ -1,14 +1,14 @@
-import './pages/index.css'; // добавьте импорт главного файла стилей
-import { Card } from './scripts/Card.js';
-import { FormValidator } from './scripts/FormValidator.js';
-import { PopupWithForm } from './scripts/PopupWithForm.js';
-import { PopupWithImage } from './scripts/PopupWithImage.js';
-import { Section } from './scripts/Section.js';
-import { UserInfo } from './scripts/UserInfo.js';
+// все картинки добавляются корректно
+
+import './index.css'; // добавьте импорт главного файла стилей
+import { Card } from '../components/Card.js';
+import { FormValidator } from '../components/FormValidator.js';
+import { PopupWithForm } from '../components/PopupWithForm.js';
+import { PopupWithImage } from '../components/PopupWithImage.js';
+import { Section } from '../components/Section.js';
+import { UserInfo } from '../components/UserInfo.js';
 
 import {
-  popupImg,
-  popupImgTitle,
   initialCards,
   cardParameters,
   formParameters,
@@ -17,11 +17,7 @@ import {
   popupParameters,
   formProfile,
   formPlace,
-  inputName,
-  inputJob,
-  inputPlace,
-  inputLink,
-} from './variables.js';
+} from '../variables.js';
 
 // ----------------Инстансы------------------
 /** Инстанс попапа профиля */
@@ -40,7 +36,9 @@ const popupPlaceInstance = new PopupWithForm(
 
 /** Инстанс попапа фото */
 const popupPhotoInstance = new PopupWithImage(
-  popupParameters.popupPhotoSelector
+  popupParameters.popupPhotoSelector,
+  popupParameters.popupImgSelector,
+  popupParameters.popupImgTitleSelector
 );
 
 /** Инстанс Section */
@@ -69,35 +67,34 @@ placeFormValidator.enableValidation();
 /** Функция добавления value в попап профиля */
 function addValuePopupProfile() {
   const { userName, userJob } = userInfoInstance.getUserInfo();
-  inputName.value = userName;
-  inputJob.value = userJob;
+  const data = { name: userName, job: userJob };
+  popupProfileInstance.setInputValues(data);
 }
 
 /** Функция редактирования попапа профиля */
-function handleChangeValuePopupProfile(event) {
+function handleChangeValuePopupProfile(event, inputValues) {
   event.preventDefault();
   userInfoInstance.setUserInfo({
-    userName: inputName.value,
-    userJob: inputJob.value,
+    userName: inputValues.name,
+    userJob: inputValues.job,
   });
   popupProfileInstance.close();
 }
 
 /** Функция добавления карточки места */
-function handleAddPlaceCard(event) {
+function handleAddPlaceCard(event, inputValues) {
   event.preventDefault();
   popupPlaceInstance.close();
-  const cardData = { name: inputPlace.value, link: inputLink.value };
+  const cardData = { name: inputValues.place, link: inputValues.url };
   /** создает элемент карточки */
   const card = renderer(cardData);
   /** вставляет карточку в контейнер секции */
   section.addItem(card);
-  formPlace.reset();
 }
 
 /** Функция открытия попапа фото */
 function handleCardClick(name, link) {
-  popupPhotoInstance.open(popupImg, popupImgTitle, name, link);
+  popupPhotoInstance.open(name, link);
 }
 
 /** Функция создания карточки */
@@ -122,8 +119,11 @@ profileEditBtn.addEventListener('click', () => {
   profileFormValidator.checkFormValidity();
 });
 
-/** Навешивание слушателя на отправку формы попапа карточки места */
+/** Навешивание слушателя на закрытие попапа места */
 popupPlaceInstance.setEventListeners();
 
-/** Навешивание слушателя на отправку формы попапа профиля */
+/** Навешивание слушателя на закрытие попапа профиля */
 popupProfileInstance.setEventListeners();
+
+/** Навешивание слушателя на закрытие попапа фото  */
+popupPhotoInstance.setEventListeners();

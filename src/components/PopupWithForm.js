@@ -1,4 +1,4 @@
-import { Popup } from "./Popup.js";
+import { Popup } from './Popup.js';
 
 class PopupWithForm extends Popup {
   constructor(popupSelector, submitHandler, formParameters) {
@@ -21,11 +21,19 @@ class PopupWithForm extends Popup {
     return formInputValues;
   }
 
+  setInputValues(data) {
+    this._inputList.forEach((inputElement) => {
+      // тут вставляем в `value` инпута данные из объекта по атрибуту `name` этого инпута
+      inputElement.value = data[inputElement.name];
+    });
+  }
+
   setEventListeners() {
-    this._popup.addEventListener("click", (event) =>
-      this._handleClosePopup(event)
-    );
-    this._popup.addEventListener("submit", this._submitHandler);
+    super.setEventListeners();
+    this._popup.addEventListener('submit', (event) => {
+      const inputValues = this._getInputValues();
+      this._submitHandler(event, inputValues);
+    });
   }
 
   /**  Перезаписывает родительский метод close и сбрасывает форму */
