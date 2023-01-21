@@ -58,17 +58,13 @@ export const popupParameters = {
   popupProfileSelector: '.popup_type_profile',
   popupPlaceSelector: '.popup_type_place',
   popupPhotoSelector: '.popup_type_photo',
+  popupImgSelector: '.popup__img',
+  popupImgTitleSelector: '.popup__img-title',
 };
 
-export const popupImg = document.querySelector('.popup__img');
-export const popupImgTitle = document.querySelector('.popup__img-title');
 export const profileEditBtn = document.querySelector('.profile__button-edit');
 export const profileAddBtn = document.querySelector('.profile__button-add');
 export const formProfile = document.querySelector('.popup__form-profile');
 export const formPlace = document.querySelector('.popup__form-place');
-export const inputName = document.querySelector('.popup__input_type_name');
-export const inputJob = document.querySelector('.popup__input_type_job');
-export const inputPlace = document.querySelector('.popup__input_type_place');
-export const inputLink = document.querySelector('.popup__input_type_link');
 export const galleryList = document.querySelector('.gallery__list');
 export const popupCloseBtn = document.querySelector('.popup__close');
