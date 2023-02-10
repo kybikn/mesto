@@ -1,7 +1,12 @@
 class UserInfo {
-  constructor(profileTitleSelector, profileSubtitleSelector) {
+  constructor(
+    profileTitleSelector,
+    profileSubtitleSelector,
+    profileAvatarSelector
+  ) {
     this._name = document.querySelector(profileTitleSelector);
     this._job = document.querySelector(profileSubtitleSelector);
+    this._avatar = document.querySelector(profileAvatarSelector);
   }
 
   /**  Метод возвращает объект с данными пользователя */
@@ -15,6 +20,14 @@ class UserInfo {
   setUserInfo(data) {
     this._name.textContent = data.userName;
     this._job.textContent = data.userJob;
+  }
+
+  setUserAvatar(avatarUrl) {
+    this._avatar.src = avatarUrl;
+  }
+
+  setUserId(userId) {
+    this.id = userId;
   }
 }
 

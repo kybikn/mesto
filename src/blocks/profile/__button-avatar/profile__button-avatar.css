@@ -1,0 +1,15 @@
+.profile__button-avatar {
+  all: unset;
+  width: 26px;
+  height: 26px;
+  position: absolute;
+  top: 40%;
+  right: 40%;
+}
+
+@media screen and (max-width: 860px) {
+  .profile__button-avatar {
+    width: 17px;
+    height: 17px;
+  }
+}

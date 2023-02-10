@@ -45,7 +45,7 @@ async function main() {
     popupParameters.popupImgTitleSelector
   );
 
-  /** Инстанс попапа аватара */
+  /** Инстанс попапа автара */
   // const popupAvatarInstance = new PopupWithForm(
   //   popupParameters.popupAvatarSelector,
   //   formParameters
@@ -54,8 +54,7 @@ async function main() {
   /** Инстанс UserInfo */
   const userInfoInstance = new UserInfo(
     popupParameters.profileTitleSelector,
-    popupParameters.profileSubtitleSelector,
-    popupParameters.profileAvatarSelector
+    popupParameters.profileSubtitleSelector
   );
 
   /** Инстанс формы профиля */
@@ -86,16 +85,8 @@ async function main() {
   //   });
   const api = new Api(apiConfig);
   const initialCards = await api.getInitialCards();
-
-  const profile = await api.getProfile();
-  userInfoInstance.setUserInfo({
-    userName: profile.name,
-    userJob: profile.about,
-  });
-  userInfoInstance.setUserAvatar(profile.avatar);
-  userInfoInstance.setUserId(profile._id);
-
   /** Инстанс Section */
+
   const section = new Section(
     { items: initialCards, renderer: renderer },
     '.gallery__list'
@@ -109,44 +100,23 @@ async function main() {
     popupProfileInstance.setInputValues(data);
   }
 
-  /** Функция обработки нажатия кнопки сохранения профиля */
+  /** Функция редактирования попапа профиля */
   function handleChangeValuePopupProfile(event, inputValues) {
     event.preventDefault();
-    // Измение надписи на кнопке на время отправки информации на сервер
-    formProfile.querySelector(formParameters.submitButtonSelector).innerHTML =
-      'Сохранение...';
-    // подготовка данных для отправки на сервер и отображения
-    const userData = {
+    userInfoInstance.setUserInfo({
       userName: inputValues.name,
       userJob: inputValues.job,
-    };
-    // отправка на сервер
-    api
-      .editProfile(userData)
-      .then(() => {
-        formProfile.querySelector(
-          formParameters.submitButtonSelector
-        ).innerHTML = 'Сохранить';
-        // меняются данные профиля на странице
-        userInfoInstance.setUserInfo(userData);
-        // закрытие попапа
-        popupProfileInstance.close();
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    });
+    popupProfileInstance.close();
   }
 
   /** Функция добавления карточки места */
-  async function handleAddPlaceCard(event, inputValues) {
+  function handleAddPlaceCard(event, inputValues) {
     event.preventDefault();
     popupPlaceInstance.close();
     const cardData = { name: inputValues.place, link: inputValues.url };
-    // отправляем карточку на сервер, на основании ответа генерируем карточку
-    const responseCardData = await api.addNewCard(cardData);
     /** создает элемент карточки */
-    const card = await renderer(responseCardData);
-
+    const card = renderer(cardData);
     /** вставляет карточку в контейнер секции */
     section.addItem(card);
   }
@@ -158,12 +128,7 @@ async function main() {
 
   /** Функция создания карточки */
   function renderer(cardData) {
-    const card = new Card(
-      cardData,
-      cardParameters,
-      handleCardClick
-      // userInfoInstance.id
-    );
+    const card = new Card(cardData, cardParameters, handleCardClick);
     return card.generateCard();
   }
   section.renderItems();

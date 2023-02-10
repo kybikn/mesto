@@ -1,7 +1,10 @@
 class Card {
-  constructor(cardData, cardParameters, handleCardClick) {
+  constructor(cardData, cardParameters, handleCardClick, userId) {
     this._name = cardData.name;
     this._link = cardData.link;
+    this._id = cardData._id;
+    this._likes = cardData.likes;
+    this._owner = cardData.owner;
     this._imgSelector = cardParameters.imgSelector;
     this._titleSelector = cardParameters.titleSelector;
     this._likeButtonSelector = cardParameters.likeButtonSelector;
@@ -53,9 +56,9 @@ class Card {
 
   /** Метод добавления слушателей событий */
   _setEventListeners() {
-    this._buttonRemove.addEventListener("click", () => this._removeCard());
-    this._cardLike.addEventListener("click", () => this._handleAddLike());
-    this._cardImage.addEventListener("click", () => {
+    this._buttonRemove.addEventListener('click', () => this._removeCard());
+    this._cardLike.addEventListener('click', () => this._handleAddLike());
+    this._cardImage.addEventListener('click', () => {
       this._handleCardClick(this._name, this._link);
     });
   }
