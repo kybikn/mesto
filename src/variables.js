@@ -1,10 +1,3 @@
-import karachayCherkessiaImage from './images/Karachay-Cherkessia.jpg';
-import nalchikImage from './images/Nalchik.jpg';
-import kabardinoBalkariyaImage from './images/Kabardino-Balkariya.jpg';
-import karachaevskImage from './images/Karachaevsk.jpg';
-import dombaiImage from './images/Dombai.jpg';
-import elbrusImage from './images/Elbrus.jpg';
-
 export const apiConfig = {
   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-58',
   headers: {
@@ -26,6 +19,7 @@ export const cardParameters = {
   imgSelector: '.card__img',
   titleSelector: '.card__title',
   likeButtonSelector: '.card__button-like',
+  likesNumSelector: '.card__num-likes',
   activeButtonClass: 'card__button-like_active',
   removeButtonSelector: '.card__button-remove',
   templateSelector: '#card',

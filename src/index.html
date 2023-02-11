@@ -102,7 +102,6 @@
         </figcaption>
       </figure>
     </div>
-
     <div class="popup popup_type_delete">
       <div class="popup__content">
         <button class="popup__close" type="button"></button>
@@ -112,7 +111,6 @@
         </form>
       </div>
     </div>
-
     <div class="popup popup_type_avatar">
       <div class="popup__content">
         <button class="popup__close"></button>
@@ -132,7 +130,6 @@
         </form>
       </div>
     </div>
-
     <template id="card">
       <li>
         <figure class="card">
@@ -140,7 +137,10 @@
           <button class="button card__button-remove"></button>
           <figcaption class="card__description">
             <h2 class="card__title"></h2>
-            <button class="button card__button-like" type="button"></button>
+            <div>
+              <button class="button card__button-like" type="button"></button>
+              <div class="card__num-likes">0</div>
+            </div>
           </figcaption>
         </figure>
       </li>

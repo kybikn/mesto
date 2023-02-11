@@ -15,6 +15,7 @@ class Card {
     this._imgSelector = cardParameters.imgSelector;
     this._titleSelector = cardParameters.titleSelector;
     this._likeButtonSelector = cardParameters.likeButtonSelector;
+    this._likesNumSelector = cardParameters.likesNumSelector;
     this._activeButtonClass = cardParameters.activeButtonClass;
     this._removeButtonSelector = cardParameters.removeButtonSelector;
     this._templateSelector = cardParameters.templateSelector;
@@ -33,6 +34,7 @@ class Card {
       .querySelector(this._templateSelector)
       .content.querySelector(this._cardSelector);
     const card = cardTemplate.cloneNode(true);
+    this._card = card;
     return card;
   }
 
@@ -66,9 +68,17 @@ class Card {
   /** Метод добавления лайка */
   _handleToggleLikeWithApi() {
     if (this._cardLike.classList.contains(this._activeButtonClass)) {
-      this._api.deleteLike(this._id).then(() => this._handleDeleteLike());
+      this._api.deleteLike(this._id).then((responseCardData) => {
+        this._likes = responseCardData.likes;
+        this._setLikes();
+        this._handleDeleteLike();
+      });
     } else {
-      this._api.addLike(this._id).then(() => this._handleAddLike());
+      this._api.addLike(this._id).then((responseCardData) => {
+        this._likes = responseCardData.likes;
+        this._setLikes();
+        this._handleAddLike();
+      });
     }
   }
 
@@ -113,7 +123,14 @@ class Card {
     }
     this._setData();
     this._setEventListeners();
+    this._setLikes();
     return this._newCard;
+  }
+
+  _setLikes() {
+    const likesNum = this._likes.length;
+    const likesNumElem = this._card.querySelector(this._likesNumSelector);
+    likesNumElem.textContent = likesNum;
   }
 }
 
