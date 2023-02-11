@@ -24,6 +24,135 @@ import {
 } from '../variables.js';
 
 async function main() {
+  // ----------------Функции------------------
+  /** Функция добавления value в попап профиля */
+  function addValuePopupProfile() {
+    const { userName, userJob } = userInfoInstance.getUserInfo();
+    const data = { name: userName, job: userJob };
+    popupProfileInstance.setInputValues(data);
+  }
+
+  /** Функция обработки нажатия кнопки сохранения профиля */
+  function handleChangeValuePopupProfile(event, inputValues) {
+    event.preventDefault();
+    // Измение надписи на кнопке на время отправки информации на сервер
+    formProfile.querySelector(formParameters.submitButtonSelector).innerHTML =
+      'Сохранение...';
+    // подготовка данных для отправки на сервер и отображения
+    const userData = {
+      userName: inputValues.name,
+      userJob: inputValues.job,
+    };
+    // отправка на сервер
+    api
+      .editProfile(userData)
+      .then(() => {
+        formProfile.querySelector(
+          formParameters.submitButtonSelector
+        ).textContent = 'Сохранить';
+        // меняются данные профиля на странице
+        userInfoInstance.setUserInfo(userData);
+        // закрытие попапа
+        popupProfileInstance.close();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  /** Функция обработки нажатия кнопки сохранения аватара пользователя */
+  function handleChangeAvatar(event, inputValues) {
+    event.preventDefault();
+    // Измение надписи на кнопке на время отправки информации на сервер
+    formAvatar.querySelector(formParameters.submitButtonSelector).innerHTML =
+      'Сохранение...';
+    // подготовка данных для отправки на сервер и отображения
+    const link = inputValues.link;
+    // отправка на сервер
+    api
+      .editAvatar(link)
+      .then(() => {
+        formAvatar.querySelector(
+          formParameters.submitButtonSelector
+        ).textContent = 'Сохранить';
+        // меняются данные профиля на странице
+        userInfoInstance.setUserAvatar(link);
+        // закрытие попапа
+        popupAvatarInstance.close();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  /** Функция добавления в данные карточек информации о лайке (like=true|false)
+   * и является ли пользователь владельцем карточки (isOwner=true|false) */
+  function enrichCardData(responseCardData) {
+    if (userInfoInstance.id === responseCardData.owner._id) {
+      responseCardData.isOwner = true;
+    } else responseCardData.isOwner = false;
+    if (
+      responseCardData.likes.some((owner) => owner._id === userInfoInstance.id)
+    ) {
+      responseCardData.like = true;
+    } else responseCardData.like = false;
+    return responseCardData;
+  }
+
+  /** Функция добавления карточки места */
+  async function handleAddPlaceCard(event, inputValues) {
+    event.preventDefault();
+    popupPlaceInstance.close();
+    const cardData = { name: inputValues.place, link: inputValues.url };
+
+    // --------- новый кусок, связанный с отправкой на сервер ----------
+    // на время отправки меняем надпись на кнопке
+    formPlace.querySelector(formParameters.submitButtonSelector).textContent =
+      'Сохранение...';
+    // отправляем карточку на сервер, на основании ответа генерируем карточку
+    const responseCardData = await api.addNewCard(cardData);
+    // возвращаем надпись на кнопке как было
+    formPlace.querySelector(formParameters.submitButtonSelector).textContent =
+      'Сохранить';
+    // закрываем инстанс попапа
+    popupPlaceInstance.close();
+    /** добавляет в данные карточек информацию о лайке (like)
+     * данным пользователем и нужно ли отображать корзину(isOwner) */
+
+    const enrichedCardData = enrichCardData(responseCardData);
+
+    /** создает элемент карточки */
+    const card = renderer(enrichedCardData);
+
+    /** вставляет карточку в контейнер секции */
+    section.addItem(card);
+  }
+
+  /** Функция открытия попапа фото */
+  function handleCardClick(name, link) {
+    popupPhotoInstance.open(name, link);
+  }
+
+  /** Обработчик подтверждения удаления */
+  function handleDeleteConfirmation(event, next) {
+    event.preventDefault();
+    next();
+    // закрываем инстанс попапа
+    popupDeleteConfirmationInstance.close();
+  }
+
+  /** Функция создания карточки */
+  function renderer(cardData) {
+    const card = new Card(
+      cardData,
+      cardParameters,
+      handleCardClick,
+      api,
+      popupDeleteConfirmationInstance
+    );
+    return card.generateCard();
+  }
+
   // ----------------Инстансы------------------
   /** Инстанс попапа профиля */
   const popupProfileInstance = new PopupWithForm(
@@ -71,21 +200,9 @@ async function main() {
   placeFormValidator.enableValidation();
 
   /** Инстанс формы аватара пользователя */
-  const avatarFormValidator = new FormValidator(formParameters, formAvatar); // TODO проверить
+  const avatarFormValidator = new FormValidator(formParameters, formAvatar);
   /** Добавляем валидацию для формы места */
   avatarFormValidator.enableValidation();
-
-  /** Инстанс Api */
-
-  // result - это готовые данные
-  // api
-  //   .getInitialCards()
-  //   .then((result) => {
-  //     section.renderItems(result);
-  //   })
-  //   .catch((err) => {
-  //     console.log(err);
-  //   });
 
   // --------   Работа с API ------------
   const api = new Api(apiConfig);
@@ -119,136 +236,6 @@ async function main() {
     '.gallery__list'
   );
   section.renderItems();
-
-  // ----------------Функции------------------
-  /** Функция добавления value в попап профиля */
-  function addValuePopupProfile() {
-    const { userName, userJob } = userInfoInstance.getUserInfo();
-    const data = { name: userName, job: userJob };
-    popupProfileInstance.setInputValues(data);
-  }
-
-  /** Функция обработки нажатия кнопки сохранения профиля */
-  function handleChangeValuePopupProfile(event, inputValues) {
-    event.preventDefault();
-    // Измение надписи на кнопке на время отправки информации на сервер
-    formProfile.querySelector(formParameters.submitButtonSelector).innerHTML =
-      'Сохранение...';
-    // подготовка данных для отправки на сервер и отображения
-    const userData = {
-      userName: inputValues.name,
-      userJob: inputValues.job,
-    };
-    // отправка на сервер
-    api
-      .editProfile(userData)
-      .then(() => {
-        formProfile.querySelector(
-          formParameters.submitButtonSelector
-        ).innerHTML = 'Сохранить';
-        // меняются данные профиля на странице
-        userInfoInstance.setUserInfo(userData);
-        // закрытие попапа
-        popupProfileInstance.close();
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
-
-  /** Функция обработки нажатия кнопки сохранения аватара пользователя */
-  function handleChangeAvatar(event, inputValues) {
-    event.preventDefault();
-    console.log('кликнули сохранить', event, 'Введенные данные:', inputValues);
-    // Измение надписи на кнопке на время отправки информации на сервер
-    formAvatar.querySelector(formParameters.submitButtonSelector).innerHTML =
-      'Сохранение...';
-    // подготовка данных для отправки на сервер и отображения
-    const link = inputValues.link;
-    // отправка на сервер
-    api
-      .editAvatar(link)
-      .then(() => {
-        formAvatar.querySelector(
-          formParameters.submitButtonSelector
-        ).innerHTML = 'Сохранить';
-        // меняются данные профиля на странице
-        userInfoInstance.setUserAvatar(link);
-        // закрытие попапа
-        popupAvatarInstance.close();
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
-
-  /** добавляет в данные карточек информацию о лайке данным пользователем и нужно ли отображать корзину */
-  function enrichCardData(responseCardData) {
-    if (userInfoInstance.id === responseCardData.owner._id) {
-      responseCardData.isOwner = true;
-    } else responseCardData.isOwner = false;
-    if (
-      responseCardData.likes.some((owner) => owner._id === userInfoInstance.id)
-    ) {
-      responseCardData.like = true;
-    } else responseCardData.like = false;
-    // console.log('Enriched responseCardData:', JSON.stringify(responseCardData));
-    return responseCardData;
-  }
-
-  /** Функция добавления карточки места */
-  async function handleAddPlaceCard(event, inputValues) {
-    event.preventDefault();
-    popupPlaceInstance.close();
-    const cardData = { name: inputValues.place, link: inputValues.url };
-
-    // --------- новый кусок, связанный с отправкой на сервер ----------
-    // на время отправки меняем надпись на кнопке
-    formPlace.querySelector(formParameters.submitButtonSelector).innerHTML =
-      'Сохранение...';
-    // отправляем карточку на сервер, на основании ответа генерируем карточку
-    const responseCardData = await api.addNewCard(cardData);
-    // возвращаем надпись на кнопке как было
-    formPlace.querySelector(formParameters.submitButtonSelector).innerHTML =
-      'Сохранить';
-    // закрываем инстанс попапа
-    popupPlaceInstance.close();
-    /** добавляет в данные карточек информацию о лайке (like)
-     * данным пользователем и нужно ли отображать корзину(isOwner) */
-
-    const enrichedCardData = enrichCardData(responseCardData);
-
-    /** создает элемент карточки */
-    const card = renderer(enrichedCardData);
-
-    /** вставляет карточку в контейнер секции */
-    section.addItem(card);
-  }
-
-  /** Функция открытия попапа фото */
-  function handleCardClick(name, link) {
-    popupPhotoInstance.open(name, link);
-  }
-
-  /** Обработчик подтверждения удаления */
-  function handleDeleteConfirmation(event, next) {
-    event.preventDefault();
-    next();
-    // закрываем инстанс попапа
-    popupDeleteConfirmationInstance.close();
-  }
-
-  /** Функция создания карточки */
-  function renderer(cardData) {
-    const card = new Card(
-      cardData,
-      cardParameters,
-      handleCardClick,
-      api,
-      popupDeleteConfirmationInstance
-    );
-    return card.generateCard();
-  }
 
   // ----------------Слушатели------------------
   /** Слушатель и функция открытия попапа карточки места */
