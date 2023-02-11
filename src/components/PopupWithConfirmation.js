@@ -5,7 +5,6 @@ class PopupWithConfirmation extends Popup {
     super(popupSelector);
     this._submitHandler = submitHandler;
     this._form = this._popup.querySelector(formParameters.formSelector);
-    console.log(this._form);
   }
 
   addNext(next) {
