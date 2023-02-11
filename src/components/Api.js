@@ -64,21 +64,23 @@ class Api {
       method: 'DELETE',
     }).then(this._handleResponse);
   }
+
+  addLike(cardId) {
+    const likeCardsUrl = `${this._cardsUrl}/${cardId}/likes `;
+    return fetch(likeCardsUrl, {
+      headers: this._headers,
+      method: 'PUT',
+    }).then(this._handleResponse);
+  }
+
+  deleteLike(cardId) {
+    const likeCardsUrl = `${this._cardsUrl}/${cardId}/likes`;
+    return fetch(likeCardsUrl, {
+      headers: this._headers,
+      method: 'DELETE',
+    }).then(this._handleResponse);
+  }
 }
-
-//   addLike(cardId) {
-//     return fetch(this._url, {
-//       headers: this._headers,
-//       method: "PUT",
-//   }).then(this._isResponse);
-// }
-
-//   deleteLike(cardId) {
-//     return fetch(this._url, {
-//       headers: this._headers,
-//       method: "DELETE",
-//   }).then(this._isResponse);
-// }
 
 // другие методы работы с API
 

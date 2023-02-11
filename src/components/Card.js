@@ -1,10 +1,11 @@
 class Card {
-  constructor(cardData, cardParameters, handleCardClick, userId) {
+  constructor(cardData, cardParameters, handleCardClick, api) {
     this._name = cardData.name;
     this._link = cardData.link;
     this._id = cardData._id;
     this._likes = cardData.likes;
-    this._owner = cardData.owner;
+    this._like = cardData.like;
+    this._isOwner = cardData.isOwner;
     this._imgSelector = cardParameters.imgSelector;
     this._titleSelector = cardParameters.titleSelector;
     this._likeButtonSelector = cardParameters.likeButtonSelector;
@@ -14,6 +15,7 @@ class Card {
     this._cardSelector = cardParameters.cardSelector;
     this._cardPopup = document.querySelector(cardParameters.cardPopupSelector);
     this._handleCardClick = handleCardClick;
+    this._api = api;
   }
 
   /** Метод генерации карточки */
@@ -44,20 +46,38 @@ class Card {
   }
 
   /** Метод удаления карточки */
-  _removeCard() {
-    this._newCard.remove();
-    this._newCard = null;
+  async _removeCard() {
+    // this._buttonRemove.src = '';
+    const json = await this._api.deleteCard(this._id);
+    if (json) {
+      this._newCard.remove();
+      this._newCard = null;
+    }
   }
 
   /** Метод добавления лайка */
+  _handleToggleLikeWithApi() {
+    if (this._cardLike.classList.contains(this._activeButtonClass)) {
+      this._api.deleteLike(this._id).then(() => this._handleDeleteLike());
+    } else {
+      this._api.addLike(this._id).then(() => this._handleAddLike());
+    }
+  }
+
   _handleAddLike() {
-    this._cardLike.classList.toggle(this._activeButtonClass);
+    this._cardLike.classList.add(this._activeButtonClass);
+  }
+
+  _handleDeleteLike() {
+    this._cardLike.classList.remove(this._activeButtonClass);
   }
 
   /** Метод добавления слушателей событий */
   _setEventListeners() {
     this._buttonRemove.addEventListener('click', () => this._removeCard());
-    this._cardLike.addEventListener('click', () => this._handleAddLike());
+    this._cardLike.addEventListener('click', () =>
+      this._handleToggleLikeWithApi()
+    );
     this._cardImage.addEventListener('click', () => {
       this._handleCardClick(this._name, this._link);
     });
@@ -67,6 +87,15 @@ class Card {
   generateCard() {
     this._newCard = this._getTemplate();
     this._setElements();
+    // ставим лайк, если он тобой поставлен
+    if (this._like) {
+      this._handleAddLike();
+    }
+    // Не отображаем иконку корзины (удаления карточки),
+    // если не карточка не принадлежит пользователю.
+    if (!this._isOwner) {
+      this._buttonRemove.remove();
+    }
     this._setData();
     this._setEventListeners();
     return this._newCard;

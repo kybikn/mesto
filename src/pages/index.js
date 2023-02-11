@@ -51,13 +51,6 @@ async function main() {
   //   formParameters
   // );
 
-  /** Инстанс UserInfo */
-  const userInfoInstance = new UserInfo(
-    popupParameters.profileTitleSelector,
-    popupParameters.profileSubtitleSelector,
-    popupParameters.profileAvatarSelector
-  );
-
   /** Инстанс формы профиля */
   const profileFormValidator = new FormValidator(formParameters, formProfile);
   /** Добавляем валидацию для формы профиля */
@@ -84,10 +77,21 @@ async function main() {
   //   .catch((err) => {
   //     console.log(err);
   //   });
-  const api = new Api(apiConfig);
-  const initialCards = await api.getInitialCards();
 
+  // --------   Работа с API ------------
+  const api = new Api(apiConfig);
+
+  // получение и оформление профиля пользователя
   const profile = await api.getProfile();
+
+  /** Инстанс UserInfo */
+  const userInfoInstance = new UserInfo(
+    popupParameters.profileTitleSelector,
+    popupParameters.profileSubtitleSelector,
+    popupParameters.profileAvatarSelector,
+    profile
+  );
+
   userInfoInstance.setUserInfo({
     userName: profile.name,
     userJob: profile.about,
@@ -95,11 +99,17 @@ async function main() {
   userInfoInstance.setUserAvatar(profile.avatar);
   userInfoInstance.setUserId(profile._id);
 
+  // ----- Получение и генерация карточек -------
+  const initialCards = await api.getInitialCards();
   /** Инстанс Section */
+  const enrichedInitialCard = initialCards.map((cardData) =>
+    enrichCardData(cardData)
+  );
   const section = new Section(
-    { items: initialCards, renderer: renderer },
+    { items: enrichedInitialCard, renderer: renderer },
     '.gallery__list'
   );
+  section.renderItems();
 
   // ----------------Функции------------------
   /** Функция добавления value в попап профиля */
@@ -137,15 +147,36 @@ async function main() {
       });
   }
 
+  /** добавляет в данные карточек информацию о лайке данным пользователем и нужно ли отображать корзину */
+  function enrichCardData(responseCardData) {
+    if (userInfoInstance.id === responseCardData.owner._id) {
+      responseCardData.isOwner = true;
+    } else responseCardData.isOwner = false;
+    if (
+      responseCardData.likes.some((owner) => owner._id === userInfoInstance.id)
+    ) {
+      responseCardData.like = true;
+    } else responseCardData.like = false;
+    console.log('Enriched responseCardData:', JSON.stringify(responseCardData));
+    return responseCardData;
+  }
+
   /** Функция добавления карточки места */
   async function handleAddPlaceCard(event, inputValues) {
     event.preventDefault();
     popupPlaceInstance.close();
     const cardData = { name: inputValues.place, link: inputValues.url };
+
+    // --------- новый кусок, связанный с отправкой на сервер ----------
     // отправляем карточку на сервер, на основании ответа генерируем карточку
     const responseCardData = await api.addNewCard(cardData);
+    /** добавляет в данные карточек информацию о лайке (like)
+     * данным пользователем и нужно ли отображать корзину(isOwner) */
+
+    const enrichedCardData = enrichCardData(responseCardData);
+
     /** создает элемент карточки */
-    const card = await renderer(responseCardData);
+    const card = renderer(enrichedCardData);
 
     /** вставляет карточку в контейнер секции */
     section.addItem(card);
@@ -158,15 +189,9 @@ async function main() {
 
   /** Функция создания карточки */
   function renderer(cardData) {
-    const card = new Card(
-      cardData,
-      cardParameters,
-      handleCardClick
-      // userInfoInstance.id
-    );
+    const card = new Card(cardData, cardParameters, handleCardClick, api);
     return card.generateCard();
   }
-  section.renderItems();
 
   // ----------------Слушатели------------------
   /** Слушатель и функция открытия попапа карточки места */
