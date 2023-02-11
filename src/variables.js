@@ -41,20 +41,18 @@ export const popupParameters = {
   popupProfileSelector: '.popup_type_profile',
   popupPlaceSelector: '.popup_type_place',
   popupPhotoSelector: '.popup_type_photo',
-  // popupAvatarSelector: '.popup_type_avatar',
-  // popupDeleteSelector: '.popup_type_delete',
+  popupAvatarSelector: '.popup_type_avatar',
+  popupDeleteSelector: '.popup_type_delete',
   popupImgSelector: '.popup__img',
   popupImgTitleSelector: '.popup__img-title',
 };
 
 export const profileEditBtn = document.querySelector('.profile__button-edit');
 export const profileAddBtn = document.querySelector('.profile__button-add');
-// export const profileAvatarBtn = document.querySelector(
-//   '.profile__button-avatar'
-// );
+export const profileAvatarBtn = document.querySelector('.profile__avatar-box');
 export const formProfile = document.querySelector('.popup__form-profile');
 export const formPlace = document.querySelector('.popup__form-place');
-// export const formAvatar = document.querySelector('.popup__form-avatar');
-// export const formDelete = document.querySelector('.popup__form-delete');
+export const formAvatar = document.querySelector('.popup__form-avatar');
+export const formDelete = document.querySelector('.popup__form-delete');
 export const galleryList = document.querySelector('.gallery__list');
 export const popupCloseBtn = document.querySelector('.popup__close');

@@ -16,10 +16,11 @@ import {
   popupParameters,
   profileEditBtn,
   profileAddBtn,
+  profileAvatarBtn,
   formProfile,
   formPlace,
-  // formAvatar,
-  // formDelete,
+  formAvatar,
+  formDelete,
 } from '../variables.js';
 
 async function main() {
@@ -46,10 +47,11 @@ async function main() {
   );
 
   /** Инстанс попапа аватара */
-  // const popupAvatarInstance = new PopupWithForm(
-  //   popupParameters.popupAvatarSelector,
-  //   formParameters
-  // );
+  const popupAvatarInstance = new PopupWithForm(
+    popupParameters.popupAvatarSelector,
+    handleChangeAvatar,
+    formParameters
+  );
 
   /** Инстанс формы профиля */
   const profileFormValidator = new FormValidator(formParameters, formProfile);
@@ -61,10 +63,10 @@ async function main() {
   /** Добавляем валидацию для формы места */
   placeFormValidator.enableValidation();
 
-  /** Инстанс формы места */
-  // const avatarFormValidator = new FormValidator(formParameters, formAvatar);
+  /** Инстанс формы аватара пользователя */
+  const avatarFormValidator = new FormValidator(formParameters, formAvatar);
   /** Добавляем валидацию для формы места */
-  // placeFormValidator.enableValidation();
+  avatarFormValidator.enableValidation();
 
   /** Инстанс Api */
 
@@ -147,6 +149,32 @@ async function main() {
       });
   }
 
+  /** Функция обработки нажатия кнопки сохранения аватара пользователя */
+  function handleChangeAvatar(event, inputValues) {
+    event.preventDefault();
+    console.log('кликнули сохранить', event, 'Введенные данные:', inputValues);
+    // Измение надписи на кнопке на время отправки информации на сервер
+    formAvatar.querySelector(formParameters.submitButtonSelector).innerHTML =
+      'Сохранение...';
+    // подготовка данных для отправки на сервер и отображения
+    const link = inputValues.link;
+    // отправка на сервер
+    api
+      .editAvatar(link)
+      .then(() => {
+        formAvatar.querySelector(
+          formParameters.submitButtonSelector
+        ).innerHTML = 'Сохранить';
+        // меняются данные профиля на странице
+        userInfoInstance.setUserAvatar(link);
+        // закрытие попапа
+        popupAvatarInstance.close();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
   /** добавляет в данные карточек информацию о лайке данным пользователем и нужно ли отображать корзину */
   function enrichCardData(responseCardData) {
     if (userInfoInstance.id === responseCardData.owner._id) {
@@ -157,7 +185,7 @@ async function main() {
     ) {
       responseCardData.like = true;
     } else responseCardData.like = false;
-    console.log('Enriched responseCardData:', JSON.stringify(responseCardData));
+    // console.log('Enriched responseCardData:', JSON.stringify(responseCardData));
     return responseCardData;
   }
 
@@ -209,9 +237,9 @@ async function main() {
   });
 
   /** Слушатель и функция открытия попапа аватара */
-  // profileAvatarBtn.addEventListener('click', () => {
-  //   popupAvatarInstance.open();
-  // });
+  profileAvatarBtn.addEventListener('click', () => {
+    popupAvatarInstance.open();
+  });
 
   /** Навешивание слушателя на закрытие попапа места */
   popupPlaceInstance.setEventListeners();
@@ -223,7 +251,7 @@ async function main() {
   popupPhotoInstance.setEventListeners();
 
   /** Навешивание слушателя на закрытие попапа аватар  */
-  // popupAvatarInstance.setEventListeners();
+  popupAvatarInstance.setEventListeners();
 }
 
 main();

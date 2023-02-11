@@ -46,6 +46,17 @@ class Api {
     }).then(this._handleResponse);
   }
 
+  editAvatar(link) {
+    const avatarUrl = `${this._profileUrl}/avatar`;
+    return fetch(avatarUrl, {
+      headers: this._headers,
+      method: 'PATCH',
+      body: JSON.stringify({
+        avatar: link,
+      }),
+    }).then(this._handleResponse);
+  }
+
   addNewCard({ name, link }) {
     return fetch(this._cardsUrl, {
       headers: this._headers,
