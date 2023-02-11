@@ -1,5 +1,11 @@
 class Card {
-  constructor(cardData, cardParameters, handleCardClick, api) {
+  constructor(
+    cardData,
+    cardParameters,
+    handleCardClick,
+    api,
+    confirmationPopup
+  ) {
     this._name = cardData.name;
     this._link = cardData.link;
     this._id = cardData._id;
@@ -16,6 +22,8 @@ class Card {
     this._cardPopup = document.querySelector(cardParameters.cardPopupSelector);
     this._handleCardClick = handleCardClick;
     this._api = api;
+    this._confirmationPopup = confirmationPopup;
+    this._removeCard = this._removeCard.bind(this);
   }
 
   /** Метод генерации карточки */
@@ -74,7 +82,14 @@ class Card {
 
   /** Метод добавления слушателей событий */
   _setEventListeners() {
-    this._buttonRemove.addEventListener('click', () => this._removeCard());
+    this._buttonRemove.addEventListener('click', () => {
+      // this._confirmationPopup.addParams({
+      //   removeCard: this._removeCard.bind.this,
+      // });
+      this._confirmationPopup.addNext(this._removeCard);
+      this._confirmationPopup.open();
+      // this._removeCard();
+    });
     this._cardLike.addEventListener('click', () =>
       this._handleToggleLikeWithApi()
     );

@@ -20,7 +20,7 @@ import {
   formProfile,
   formPlace,
   formAvatar,
-  formDelete,
+  // formDelete,
 } from '../variables.js';
 
 async function main() {
@@ -53,6 +53,13 @@ async function main() {
     formParameters
   );
 
+  /** Инстанс попапа подтверждения удаления */
+  const popupDeleteConfirmationInstance = new PopupWithConfirmation(
+    popupParameters.popupDeleteSelector,
+    handleDeleteConfirmation,
+    formParameters
+  );
+
   /** Инстанс формы профиля */
   const profileFormValidator = new FormValidator(formParameters, formProfile);
   /** Добавляем валидацию для формы профиля */
@@ -64,7 +71,7 @@ async function main() {
   placeFormValidator.enableValidation();
 
   /** Инстанс формы аватара пользователя */
-  const avatarFormValidator = new FormValidator(formParameters, formAvatar);
+  const avatarFormValidator = new FormValidator(formParameters, formAvatar); // TODO проверить
   /** Добавляем валидацию для формы места */
   avatarFormValidator.enableValidation();
 
@@ -196,8 +203,16 @@ async function main() {
     const cardData = { name: inputValues.place, link: inputValues.url };
 
     // --------- новый кусок, связанный с отправкой на сервер ----------
+    // на время отправки меняем надпись на кнопке
+    formPlace.querySelector(formParameters.submitButtonSelector).innerHTML =
+      'Сохранение...';
     // отправляем карточку на сервер, на основании ответа генерируем карточку
     const responseCardData = await api.addNewCard(cardData);
+    // возвращаем надпись на кнопке как было
+    formPlace.querySelector(formParameters.submitButtonSelector).innerHTML =
+      'Сохранить';
+    // закрываем инстанс попапа
+    popupPlaceInstance.close();
     /** добавляет в данные карточек информацию о лайке (like)
      * данным пользователем и нужно ли отображать корзину(isOwner) */
 
@@ -215,9 +230,23 @@ async function main() {
     popupPhotoInstance.open(name, link);
   }
 
+  /** Обработчик подтверждения удаления */
+  function handleDeleteConfirmation(event, next) {
+    event.preventDefault();
+    next();
+    // закрываем инстанс попапа
+    popupDeleteConfirmationInstance.close();
+  }
+
   /** Функция создания карточки */
   function renderer(cardData) {
-    const card = new Card(cardData, cardParameters, handleCardClick, api);
+    const card = new Card(
+      cardData,
+      cardParameters,
+      handleCardClick,
+      api,
+      popupDeleteConfirmationInstance
+    );
     return card.generateCard();
   }
 
@@ -252,6 +281,9 @@ async function main() {
 
   /** Навешивание слушателя на закрытие попапа аватар  */
   popupAvatarInstance.setEventListeners();
+
+  /** Навешивание слушателя на подтверждение удаления  */
+  popupDeleteConfirmationInstance.setEventListeners();
 }
 
 main();
