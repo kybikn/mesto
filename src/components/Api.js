@@ -7,7 +7,6 @@ class Api {
   }
 
   _handleResponse(response) {
-    // response - это ответ сервера
     if (response.ok) {
       return response.json();
     } else {
@@ -43,7 +42,9 @@ class Api {
         name: userName,
         about: userJob,
       }),
-    }).then(this._handleResponse);
+    })
+      .then(this._handleResponse)
+      .catch((error) => console.log(error));
   }
 
   editAvatar(link) {
@@ -54,7 +55,9 @@ class Api {
       body: JSON.stringify({
         avatar: link,
       }),
-    }).then(this._handleResponse);
+    })
+      .then(this._handleResponse)
+      .catch((error) => console.log(error));
   }
 
   addNewCard({ name, link }) {
@@ -65,7 +68,9 @@ class Api {
         name,
         link,
       }),
-    }).then(this._handleResponse);
+    })
+      .then(this._handleResponse)
+      .catch((error) => console.log(error));
   }
 
   deleteCard(cardId) {
@@ -73,7 +78,9 @@ class Api {
     return fetch(deleteCardsUrl, {
       headers: this._headers,
       method: 'DELETE',
-    }).then(this._handleResponse);
+    })
+      .then(this._handleResponse)
+      .catch((error) => console.log(error));
   }
 
   addLike(cardId) {
@@ -81,7 +88,9 @@ class Api {
     return fetch(likeCardsUrl, {
       headers: this._headers,
       method: 'PUT',
-    }).then(this._handleResponse);
+    })
+      .then(this._handleResponse)
+      .catch((error) => console.log(error));
   }
 
   deleteLike(cardId) {
@@ -89,10 +98,10 @@ class Api {
     return fetch(likeCardsUrl, {
       headers: this._headers,
       method: 'DELETE',
-    }).then(this._handleResponse);
+    })
+      .then(this._handleResponse)
+      .catch((error) => console.log(error));
   }
 }
-
-// другие методы работы с API
 
 export { Api };
