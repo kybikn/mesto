@@ -1,3 +1,5 @@
+import notFoundImg from './images/notfound.jpg';
+
 export const apiConfig = {
   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-58',
   headers: {
@@ -25,6 +27,7 @@ export const cardParameters = {
   templateSelector: '#card',
   cardSelector: '.card',
   cardPopupSelector: '.popup_type_photo',
+  notFoundImg,
 };
 
 export const popupParameters = {
