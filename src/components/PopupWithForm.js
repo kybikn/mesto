@@ -5,7 +5,9 @@ class PopupWithForm extends Popup {
     super(popupSelector);
     this._submitHandler = submitHandler;
     this._form = this._popup.querySelector(formParameters.formSelector);
-
+    this._submitButton = this._popup.querySelector(
+      formParameters.submitButtonSelector
+    );
     this._inputList = Array.from(
       this._form.querySelectorAll(formParameters.inputSelector)
     );
@@ -34,6 +36,15 @@ class PopupWithForm extends Popup {
       const inputValues = this._getInputValues();
       this._submitHandler(event, inputValues);
     });
+  }
+
+  renderLoading(isLoading, buttonText = 'Сохранить') {
+    // console.log('Вызван метод renderLoading. isLoading:', isLoading);
+    if (isLoading) {
+      this._submitButton.textContent = 'Сохранение...';
+    } else {
+      this._submitButton.textContent = buttonText;
+    }
   }
 
   /**  Перезаписывает родительский метод close и сбрасывает форму */
