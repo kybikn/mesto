@@ -25,6 +25,7 @@ class Card {
     this._apiCallbacks = apiCallbacks;
     this._confPopupCallbacks = confPopupCallbacks;
     this._removeCard = this._removeCard.bind(this);
+    this._notFoundImg = cardParameters.notFoundImg;
   }
 
   /** Метод генерации карточки */
@@ -48,11 +49,34 @@ class Card {
     this._likesNum = this._newCard.querySelector(this._likesNumSelector);
   }
 
+  // проверка рабочести url картинки
+  async _imageExists(imgUrl) {
+    if (!imgUrl) {
+      return false;
+    }
+    return new Promise((res) => {
+      const image = new Image();
+      image.onload = () => res(true);
+      image.onerror = () => res(false);
+      image.src = imgUrl;
+    });
+  }
+
   /** Метод добавления данных */
   _setData() {
     this._cardName.textContent = this._name;
-    this._cardImage.src = this._link;
-    this._cardImage.alt = this._link;
+    this._imageExists(this._link)
+      .then((res) => {
+        if (!res) {
+          console.log(
+            `Image for card ${this._name} not found, so will be used 'notfound.jpg' image instead`
+          );
+          this._link = this._notFoundImg;
+        }
+        this._cardImage.src = this._link;
+        this._cardImage.alt = this._link;
+      })
+      .catch((err) => console.log(err));
   }
 
   /** Метод удаления карточки */
