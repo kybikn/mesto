@@ -20,18 +20,14 @@ class Api {
     return fetch(this._cardsUrl, {
       headers: this._headers,
       method: 'GET',
-    })
-      .then(this._handleResponse)
-      .catch((error) => console.log(error));
+    }).then(this._handleResponse);
   }
 
   getProfile() {
     return fetch(this._profileUrl, {
       headers: this._headers,
       method: 'GET',
-    })
-      .then(this._handleResponse)
-      .catch((error) => console.log(error));
+    }).then(this._handleResponse);
   }
 
   editProfile({ userName, userJob }) {
@@ -42,9 +38,7 @@ class Api {
         name: userName,
         about: userJob,
       }),
-    })
-      .then(this._handleResponse)
-      .catch((error) => console.log(error));
+    }).then(this._handleResponse);
   }
 
   editAvatar(link) {
@@ -55,9 +49,7 @@ class Api {
       body: JSON.stringify({
         avatar: link,
       }),
-    })
-      .then(this._handleResponse)
-      .catch((error) => console.log(error));
+    }).then(this._handleResponse);
   }
 
   addNewCard({ name, link }) {
@@ -68,9 +60,7 @@ class Api {
         name,
         link,
       }),
-    })
-      .then(this._handleResponse)
-      .catch((error) => console.log(error));
+    }).then(this._handleResponse);
   }
 
   deleteCard(cardId) {
@@ -78,9 +68,7 @@ class Api {
     return fetch(deleteCardsUrl, {
       headers: this._headers,
       method: 'DELETE',
-    })
-      .then(this._handleResponse)
-      .catch((error) => console.log(error));
+    }).then(this._handleResponse);
   }
 
   addLike(cardId) {
@@ -88,9 +76,7 @@ class Api {
     return fetch(likeCardsUrl, {
       headers: this._headers,
       method: 'PUT',
-    })
-      .then(this._handleResponse)
-      .catch((error) => console.log(error));
+    }).then(this._handleResponse);
   }
 
   deleteLike(cardId) {
@@ -99,9 +85,7 @@ class Api {
     return fetch(likeCardsUrl, {
       headers: this._headers,
       method: 'DELETE',
-    })
-      .then(this._handleResponse)
-      .catch((error) => console.log(error));
+    }).then(this._handleResponse);
   }
 }
 
