@@ -3,8 +3,8 @@ class Card {
     cardData,
     cardParameters,
     handleCardClick,
-    api,
-    confirmationPopup
+    apiCallbacks,
+    confPopupCallbacks
   ) {
     this._name = cardData.name;
     this._link = cardData.link;
@@ -22,8 +22,8 @@ class Card {
     this._cardSelector = cardParameters.cardSelector;
     this._cardPopup = document.querySelector(cardParameters.cardPopupSelector);
     this._handleCardClick = handleCardClick;
-    this._api = api;
-    this._confirmationPopup = confirmationPopup;
+    this._apiCallbacks = apiCallbacks;
+    this._confPopupCallbacks = confPopupCallbacks;
     this._removeCard = this._removeCard.bind(this);
   }
 
@@ -34,7 +34,6 @@ class Card {
       .querySelector(this._templateSelector)
       .content.querySelector(this._cardSelector);
     const card = cardTemplate.cloneNode(true);
-    this._card = card;
     return card;
   }
 
@@ -46,6 +45,7 @@ class Card {
     this._buttonRemove = this._newCard.querySelector(
       this._removeButtonSelector
     );
+    this._likesNum = this._newCard.querySelector(this._likesNumSelector);
   }
 
   /** Метод добавления данных */
@@ -57,28 +57,37 @@ class Card {
 
   /** Метод удаления карточки */
   async _removeCard() {
-    // this._buttonRemove.src = '';
-    const json = await this._api.deleteCard(this._id);
-    if (json) {
-      this._newCard.remove();
-      this._newCard = null;
-    }
+    this._apiCallbacks
+      .deleteCard(this._id)
+      .then((json) => {
+        if (json) {
+          this._newCard.remove();
+          this._newCard = null;
+        }
+      })
+      .catch((err) => console.log(err));
   }
 
   /** Метод добавления лайка */
   _handleToggleLikeWithApi() {
     if (this._cardLike.classList.contains(this._activeButtonClass)) {
-      this._api.deleteLike(this._id).then((responseCardData) => {
-        this._likes = responseCardData.likes;
-        this._setLikes();
-        this._handleDeleteLike();
-      });
+      this._apiCallbacks
+        .deleteLike(this._id)
+        .then((responseCardData) => {
+          this._likes = responseCardData.likes;
+          this._setLikes();
+          this._handleDeleteLike();
+        })
+        .catch((err) => console.log(err));
     } else {
-      this._api.addLike(this._id).then((responseCardData) => {
-        this._likes = responseCardData.likes;
-        this._setLikes();
-        this._handleAddLike();
-      });
+      this._apiCallbacks
+        .addLike(this._id)
+        .then((responseCardData) => {
+          this._likes = responseCardData.likes;
+          this._setLikes();
+          this._handleAddLike();
+        })
+        .catch((err) => console.log(err));
     }
   }
 
@@ -93,12 +102,8 @@ class Card {
   /** Метод добавления слушателей событий */
   _setEventListeners() {
     this._buttonRemove.addEventListener('click', () => {
-      // this._confirmationPopup.addParams({
-      //   removeCard: this._removeCard.bind.this,
-      // });
-      this._confirmationPopup.addNext(this._removeCard);
-      this._confirmationPopup.open();
-      // this._removeCard();
+      this._confPopupCallbacks.addNext(this._removeCard);
+      this._confPopupCallbacks.open();
     });
     this._cardLike.addEventListener('click', () =>
       this._handleToggleLikeWithApi()
@@ -129,8 +134,7 @@ class Card {
 
   _setLikes() {
     const likesNum = this._likes.length;
-    const likesNumElem = this._card.querySelector(this._likesNumSelector);
-    likesNumElem.textContent = likesNum;
+    this._likesNum.textContent = likesNum;
   }
 }
 
