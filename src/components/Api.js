@@ -85,8 +85,6 @@ class Api {
 
   addLike(cardId) {
     const likeCardsUrl = `${this._cardsUrl}/${cardId}/likes`;
-    console.log('this._cardsUrl:', this._cardsUrl);
-    console.log('likeCardsUrl:', likeCardsUrl);
     return fetch(likeCardsUrl, {
       headers: this._headers,
       method: 'PUT',

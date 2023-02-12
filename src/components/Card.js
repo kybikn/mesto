@@ -57,15 +57,15 @@ class Card {
 
   /** Метод удаления карточки */
   async _removeCard() {
-    try {
-      const json = await this._apiCallbacks.deleteCard(this._id);
-      if (json) {
-        this._newCard.remove();
-        this._newCard = null;
-      }
-    } catch (err) {
-      console.log(err);
-    }
+    this._apiCallbacks
+      .deleteCard(this._id)
+      .then((json) => {
+        if (json) {
+          this._newCard.remove();
+          this._newCard = null;
+        }
+      })
+      .catch((err) => console.log(err));
   }
 
   /** Метод добавления лайка */

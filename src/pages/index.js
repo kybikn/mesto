@@ -213,26 +213,26 @@ async function main() {
     // на время отправки меняем надпись на кнопке
     const initialText = event.submitter.textContent;
     popupPlaceInstance.renderLoading(true);
-    try {
-      // отправляем карточку на сервер, на основании ответа генерируем карточку
-      const responseCardData = await api.addNewCard(cardData);
-      /** добавляет в данные карточек информацию о лайке (like)
-       * данным пользователем и нужно ли отображать корзину(isOwner) */
-      const enrichedCardData = enrichCardData(
-        responseCardData,
-        userInfoInstance.id
-      );
-      /** создает элемент карточки */
-      const card = renderer(enrichedCardData);
-      /** вставляет карточку в контейнер секции */
-      section.addItem(card);
-      // закрываем инстанс попапа
-      popupPlaceInstance.close();
-    } catch (err) {
-      console.log(err);
-    } finally {
-      popupPlaceInstance.renderLoading(false, initialText);
-    }
+
+    // отправляем карточку на сервер, на основании ответа генерируем карточку
+    api
+      .addNewCard(cardData)
+      .then((responseCardData) => {
+        /** добавляет в данные карточек информацию о лайке (like)
+         * данным пользователем и нужно ли отображать корзину(isOwner) */
+        const enrichedCardData = enrichCardData(
+          responseCardData,
+          userInfoInstance.id
+        );
+        /** создает элемент карточки */
+        const card = renderer(enrichedCardData);
+        /** вставляет карточку в контейнер секции */
+        section.addItem(card);
+        // закрываем инстанс попапа
+        popupPlaceInstance.close();
+      })
+      .catch((err) => console.log(err))
+      .finally(() => popupPlaceInstance.renderLoading(false, initialText));
   }
 
   /** Функция открытия попапа фото */
