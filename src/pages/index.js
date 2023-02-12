@@ -79,28 +79,38 @@ async function main() {
   // --------   Работа с API ------------
 
   let userInfoInstance;
+  let section;
+  // объединенный запрос данных профиля и получения карточек
+  Promise.all([api.getProfile(), api.getInitialCards()])
+    // тут деструктурируем ответ от сервера
+    .then(([profile, initialCards]) => {
+      // установка данных пользователя
+      userInfoInstance = new UserInfo(
+        popupParameters.profileTitleSelector,
+        popupParameters.profileSubtitleSelector,
+        popupParameters.profileAvatarSelector,
+        profile
+      );
+      userInfoInstance.setUserInfo({
+        userName: profile.name,
+        userJob: profile.about,
+      });
+      userInfoInstance.setUserAvatar(profile.avatar);
+      userInfoInstance.setUserId(profile._id);
 
-  try {
-    // получение и оформление профиля пользователя
-    const profile = await api.getProfile();
-
-    /** Инстанс UserInfo */
-    userInfoInstance = new UserInfo(
-      popupParameters.profileTitleSelector,
-      popupParameters.profileSubtitleSelector,
-      popupParameters.profileAvatarSelector,
-      profile
-    );
-
-    userInfoInstance.setUserInfo({
-      userName: profile.name,
-      userJob: profile.about,
+      // отрисовка карточек
+      const enrichedInitialCards = initialCards.map((cardData) =>
+        enrichCardData(cardData, userInfoInstance.id)
+      );
+      section = new Section(
+        { items: enrichedInitialCards, renderer: renderer },
+        '.gallery__list'
+      );
+      section.renderItems();
+    })
+    .catch((err) => {
+      console.log(err);
     });
-    userInfoInstance.setUserAvatar(profile.avatar);
-    userInfoInstance.setUserId(profile._id);
-  } catch (err) {
-    console.log(err);
-  }
 
   /** Функция создания карточки */
   function renderer(cardData) {
@@ -138,23 +148,6 @@ async function main() {
       responseCardData.like = true;
     } else responseCardData.like = false;
     return responseCardData;
-  }
-
-  // ----- Получение и генерация карточек -------
-  let section;
-  try {
-    const initialCards = await api.getInitialCards();
-    /** Инстанс Section */
-    const enrichedInitialCards = initialCards.map((cardData) =>
-      enrichCardData(cardData, userInfoInstance.id)
-    );
-    section = new Section(
-      { items: enrichedInitialCards, renderer: renderer },
-      '.gallery__list'
-    );
-    section.renderItems();
-  } catch (err) {
-    console.log(err);
   }
 
   /** Функция добавления value в попап профиля */
