@@ -69,10 +69,10 @@ placeFormValidator.enableValidation();
 
 /** Инстанс формы аватара пользователя */
 const avatarFormValidator = new FormValidator(formParameters, formAvatar);
-/** Добавляем валидацию для формы места */
+/** Добавляем валидацию для формы аватара */
 avatarFormValidator.enableValidation();
 
-// ----- Экземпляр класса Api --------
+// ----- Инстанс класса Api --------
 const api = new Api(apiConfig);
 
 // --------   Работа с API ------------
@@ -105,7 +105,7 @@ Promise.all([api.getProfile(), api.getInitialCards()])
       { items: enrichedInitialCards, renderer: renderer },
       '.gallery__list'
     );
-    section.renderItems();
+    section.renderItems(enrichedInitialCards);
   })
   .catch((err) => {
     console.log(err);

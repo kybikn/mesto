@@ -6,8 +6,8 @@ class Section {
   }
 
   /** Отрисовка всех элементов */
-  renderItems() {
-    this._renderedItems.forEach((item) => {
+  renderItems(items) {
+    items.reverse().forEach((item) => {
       /** функция renderer осуществляет отрисовку каждого отдельного элемента */
       /** методом addItem осуществляет добавление элемента в контейнер */
       this.addItem(this._renderer(item));
