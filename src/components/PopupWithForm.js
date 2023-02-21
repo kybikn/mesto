@@ -23,6 +23,7 @@ class PopupWithForm extends Popup {
     return formInputValues;
   }
 
+  // добавления value в инпуты
   setInputValues(data) {
     this._inputList.forEach((inputElement) => {
       // тут вставляем в `value` инпута данные из объекта по атрибуту `name` этого инпута
@@ -37,7 +38,7 @@ class PopupWithForm extends Popup {
       this._submitHandler(event, inputValues);
     });
   }
-
+  // метод для изменения текста кнопки отправки формы
   renderLoading(isLoading, buttonText = 'Сохранить') {
     // console.log('Вызван метод renderLoading. isLoading:', isLoading);
     if (isLoading) {
