@@ -22,10 +22,12 @@ class UserInfo {
     this._job.textContent = data.userJob;
   }
 
+  /**  Метод отрисовывает аватар пользователя на странице */
   setUserAvatar(avatarUrl) {
     this._avatar.src = avatarUrl;
   }
 
+  /**  Метод записи полученного id в id пользователя */
   setUserId(userId) {
     this.id = userId;
   }

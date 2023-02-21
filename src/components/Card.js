@@ -28,9 +28,8 @@ class Card {
     this._notFoundImg = cardParameters.notFoundImg;
   }
 
-  /** Метод генерации карточки */
+  /** Метод клонирования карточки на основании шаблона*/
   _getTemplate() {
-    /** клонируем карточку */
     const cardTemplate = document
       .querySelector(this._templateSelector)
       .content.querySelector(this._cardSelector);
@@ -80,11 +79,11 @@ class Card {
   }
 
   /** Метод удаления карточки */
-  async _removeCard() {
+  _removeCard() {
     this._apiCallbacks
       .deleteCard(this._id)
-      .then((json) => {
-        if (json) {
+      .then((response) => {
+        if (response) {
           this._newCard.remove();
           this._newCard = null;
         }
@@ -156,6 +155,7 @@ class Card {
     return this._newCard;
   }
 
+  /**  отображение колличества лайков на странице */
   _setLikes() {
     const likesNum = this._likes.length;
     this._likesNum.textContent = likesNum;

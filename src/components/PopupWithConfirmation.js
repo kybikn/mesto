@@ -7,6 +7,7 @@ class PopupWithConfirmation extends Popup {
     this._form = this._popup.querySelector(formParameters.formSelector);
   }
 
+  // next-это колбэк-функция, которая будет запущена после нажатия кнопки подтверждения удаления
   addNext(next) {
     this.next = next;
   }

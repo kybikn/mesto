@@ -34,9 +34,6 @@ class Popup {
   /** Функция закрытия попапа по esc */
   _handleEscClose(event) {
     if (event.key === 'Escape') {
-      // const popupCloseEsc = document.querySelector(
-      //   `.${this._activePopupClass}`
-      // );
       this.close(this._popup);
     }
   }

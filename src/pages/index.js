@@ -81,43 +81,53 @@ let userInfoInstance;
 let section;
 // объединенный запрос данных профиля и получения карточек
 Promise.all([api.getProfile(), api.getInitialCards()])
-  // тут деструктурируем ответ от сервера
+  // тут деструктурируем ответ от сервера (api.getProfile() => profile, api.getInitialCards() => initialCards)
   .then(([profile, initialCards]) => {
-    // установка данных пользователя
+    // создание инстанса пользователя
     userInfoInstance = new UserInfo(
       popupParameters.profileTitleSelector,
       popupParameters.profileSubtitleSelector,
-      popupParameters.profileAvatarSelector,
-      profile
+      popupParameters.profileAvatarSelector
     );
+    // отрисовка полученных данных профиля на странице
     userInfoInstance.setUserInfo({
       userName: profile.name,
       userJob: profile.about,
     });
+    // отрисовывает аватар пользователя на странице
     userInfoInstance.setUserAvatar(profile.avatar);
+    // сохраняет полученный id пользователя
     userInfoInstance.setUserId(profile._id);
 
     // отрисовка карточек
+
+    // проходим по массиву пришедщих карточек и обогащаем их
+    // (initialCards-все полученные карточки,cardData-данные одной карточки)
     const enrichedInitialCards = initialCards.map((cardData) =>
       enrichCardData(cardData, userInfoInstance.id)
     );
+
+    // инстанс класса Section
     section = new Section(
       { items: enrichedInitialCards, renderer: renderer },
       '.gallery__list'
     );
+    // рендеринг карточек
     section.renderItems(enrichedInitialCards);
   })
   .catch((err) => {
     console.log(err);
   });
 
-/** Функция создания карточки */
+/** Функция создания одной карточки */
 function renderer(cardData) {
+  // обьект с колбэками для вызовов методов api для Card
   const apiCallbacks = {
     deleteCard: api.deleteCard.bind(api),
     addLike: api.addLike.bind(api),
     deleteLike: api.deleteLike.bind(api),
   };
+  // обьект с колбэками для вызовов методов попапов
   const confPopupCallbacks = {
     open: popupDeleteConfirmationInstance.open.bind(
       popupDeleteConfirmationInstance
@@ -126,6 +136,8 @@ function renderer(cardData) {
       popupDeleteConfirmationInstance
     ),
   };
+
+  // инстанс класса Card
   const card = new Card(
     cardData,
     cardParameters,
@@ -133,20 +145,31 @@ function renderer(cardData) {
     apiCallbacks,
     confPopupCallbacks
   );
+  // возвращаем сгенерированную карточку
   return card.generateCard();
 }
 
 /** Функция обогащания данных карточки информацией
  * о лайке (like=true|false)
  * и является ли пользователь владельцем карточки (isOwner=true|false) */
-function enrichCardData(responseCardData, userId) {
-  if (userId === responseCardData.owner._id) {
-    responseCardData.isOwner = true;
-  } else responseCardData.isOwner = false;
-  if (responseCardData.likes.some((owner) => owner._id === userId)) {
-    responseCardData.like = true;
-  } else responseCardData.like = false;
-  return responseCardData;
+function enrichCardData(cardData, userId) {
+  // делаем глубокую копию объекта карточки, чтобы не менять изначальный объект
+  const enrichedCardData = JSON.parse(JSON.stringify(cardData));
+  // обогащение свойством isOwner
+  // если id пользователя совпадает с id владельца  карточки, то пользователь является владельцем этой карточки
+  if (userId === enrichedCardData.owner._id) {
+    enrichedCardData.isOwner = true;
+    // если не совпадает, то не является владельцем
+  } else enrichedCardData.isOwner = false;
+  // обогащение свойством like
+  // проходим по массиву всех лайков одной карточки и если id пользователя совпадает с id хоть одного пользователя поставившего лайк,
+  if (enrichedCardData.likes.some((liker) => liker._id === userId)) {
+    // то пользователь поставил лайк
+    enrichedCardData.like = true;
+    // если нет, то не поставил
+  } else enrichedCardData.like = false;
+  // возвращаем обогащенную карточку
+  return enrichedCardData;
 }
 
 /** Функция добавления value в попап профиля */
@@ -159,8 +182,10 @@ function addValuePopupProfile(userInfoInstance, popupProfileInstance) {
 /** Функция обработки нажатия кнопки сохранения профиля */
 function handleChangeValuePopupProfile(event, inputValues) {
   event.preventDefault();
+  // event.submitter-кнопка формы,на которой произошел сабмит. Получаем изначальный текст кнопки
   const initialText = event.submitter.textContent;
-  popupProfileInstance.renderLoading(true);
+  //  изменяем текст кнопки отправки формы
+  popupProfileInstance.renderLoading(true, initialText);
   // подготовка данных для отправки на сервер и отображения
   const userData = {
     userName: inputValues.name,
@@ -186,7 +211,7 @@ function handleChangeAvatar(event, inputValues) {
   event.preventDefault();
   // Измение надписи на кнопке на время отправки информации на сервер
   const initialText = event.submitter.textContent;
-  popupAvatarInstance.renderLoading(true);
+  popupAvatarInstance.renderLoading(true, initialText);
   // подготовка данных для отправки на сервер и отображения
   const link = inputValues.link;
   // отправка на сервер
@@ -205,13 +230,13 @@ function handleChangeAvatar(event, inputValues) {
 }
 
 /** Функция добавления карточки места */
-async function handleAddPlaceCard(event, inputValues) {
+function handleAddPlaceCard(event, inputValues) {
   event.preventDefault();
   const cardData = { name: inputValues.place, link: inputValues.url };
 
   // на время отправки меняем надпись на кнопке
   const initialText = event.submitter.textContent;
-  popupPlaceInstance.renderLoading(true);
+  popupPlaceInstance.renderLoading(true, initialText);
 
   // отправляем карточку на сервер, на основании ответа генерируем карточку
   api

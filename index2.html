@@ -1,0 +1,25 @@
+let isClicked = false;
+
+
+function renderAll() {
+ReactDOM.render((
+<div>
+  <div id="myElement">Click me!</div>
+
+  <div id="myAnotherElement" className={isClicked ? 'active' : '' }>
+    <div id="myText">
+      {isClicked ? 'It was clicked!' : 'Waiting for click...'}
+    </div>
+  </div>
+</div>
+), document.querySelector('#root'));
+}
+
+renderAll();
+
+
+const element = document.querySelector('#myElement');
+element.addEventListener('click', () => {
+isClicked = true;
+renderAll();
+});
