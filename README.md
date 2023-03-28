@@ -1,4 +1,4 @@
-# Проект: "MESTO" (Место)
+# Проект: "MESTO"
 
 ## О проекте: ##
 Это интерактивная страница, куда можно добавлять фотографии, удалять их и ставить лайки. Проект создавался в рамках прохождения учебного спринта курса Веб-разработчик Яндекс Практикум. Проект написан на HTML, CSS и JavaScript.
@@ -26,9 +26,10 @@
 * рефакторинг кода с помощью ООП (ES6-классы)<br>
 
 ## Ссылка на макеты в Figma ##
-https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1
-https://www.figma.com/file/bjyvbKKJN2naO0ucURl2Z0/JavaScript.-Sprint-5?node-id=0%3A1
-https://www.figma.com/file/kRVLKwYG3d1HGLvh7JFWRT/JavaScript.-Sprint-6?node-id=0%3A1
+* https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1<br>
+* https://www.figma.com/file/bjyvbKKJN2naO0ucURl2Z0/JavaScript.-Sprint-5?node-id=0%3A1<br>
+* https://www.figma.com/file/kRVLKwYG3d1HGLvh7JFWRT/JavaScript.-Sprint-6?node-id=0%3A1<br>
+* https://www.figma.com/file/5H3gsn5lIGPwzBPby9jAOo/Sprint-14-RU?node-id=0%3A1<br>
 
 ## Ссылка на сайт ##
 https://kybikn.github.io/mesto/
