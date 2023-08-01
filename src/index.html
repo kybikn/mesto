@@ -6,12 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="author" content="Анастасия Кубатина">
-  <link rel="stylesheet" href="./pages/index.css">
-  <link rel="icon" href="./images/favicon.ico">
+  <link rel="icon" href="<%=require('./images/favicon.ico')%>">
   <title>Mesto</title>
-  <script src="./scripts/variables.js" defer></script>
-  <script src="./scripts/validate.js" defer></script>
-  <script src="./scripts/index.js" defer></script>
 </head>
 
 <body class="root">
@@ -22,7 +18,10 @@
     <main>
       <section class="profile">
         <div class="profile__content">
-          <img class="profile__img" src="./images/Kusto.jpg" alt="Жак-Ив Кусто">
+          <div class="profile__avatar-box">
+            <button class="profile__button-avatar" type="button"></button>
+            <img class="profile__img profile__avatar-img" src="<%=require('./images/Kusto.jpg')%>" alt="Аватар">
+          </div>
           <div class="profile__text">
             <div class="profile__name">
               <h1 class="profile__title">Жак-Ив Кусто</h1>
@@ -43,7 +42,7 @@
     </footer>
     <div class="popup popup_type_profile">
       <div class="popup__content">
-        <button class="popup__close"></button>
+        <button class="popup__close" type="button"></button>
         <h2 class="popup__title">Редактировать профиль</h2>
         <form class="popup__form popup__form-profile" name="popup__form-profile" novalidate>
           <fieldset class="popup__box">
@@ -70,7 +69,7 @@
     </div>
     <div class="popup popup_type_place">
       <div class="popup__content">
-        <button class="popup__close"></button>
+        <button class="popup__close" type="button"></button>
         <h2 class="popup__title">Новое место</h2>
         <form class="popup__form popup__form-place" name="popup__form-place" novalidate>
           <fieldset class="popup__box">
@@ -103,6 +102,34 @@
         </figcaption>
       </figure>
     </div>
+    <div class="popup popup_type_delete">
+      <div class="popup__content">
+        <button class="popup__close" type="button"></button>
+        <h2 class="popup__title">Вы уверены?</h2>
+        <form class="popup__form popup__form-delete" name="popup__form-delete" novalidate>
+          <button class="popup__button" id="popup__button-delete" type="submit">Да</button>
+        </form>
+      </div>
+    </div>
+    <div class="popup popup_type_avatar">
+      <div class="popup__content">
+        <button class="popup__close"></button>
+        <h2 class="popup__title">Обновить аватар</h2>
+        <form class="popup__form popup__form-avatar" name="popup__form-avatar" novalidate>
+          <fieldset class="popup__box">
+            <label class="popup__label">
+              <span class="popup__input-close popup__input-avatar-close">
+                &times;
+              </span>
+              <input class="popup__input popup__input_type_avatar" id="popup__input-avatar" type="url" name="link"
+                placeholder="Ссылка на аватар" required>
+              <span class="popup__input-error popup__input-avatar-error"></span>
+            </label>
+            <button class="popup__button" id="popup__button-avatar" type="submit">Сохранить</button>
+          </fieldset>
+        </form>
+      </div>
+    </div>
     <template id="card">
       <li>
         <figure class="card">
@@ -110,7 +137,10 @@
           <button class="button card__button-remove"></button>
           <figcaption class="card__description">
             <h2 class="card__title"></h2>
-            <button class="button card__button-like" type="button"></button>
+            <div>
+              <button class="button card__button-like" type="button"></button>
+              <div class="card__num-likes">0</div>
+            </div>
           </figcaption>
         </figure>
       </li>
